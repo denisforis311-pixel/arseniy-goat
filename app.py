@@ -12,7 +12,7 @@ def home():
 
 @app.route('/get-photo')
 def get_photo():
-    return send_from_directory(os.getcwd(), 'photo. jpg')
+    return send_from_directory(os.getcwd(), 'photo.jpg')
 
 
 if name == '__main__':
