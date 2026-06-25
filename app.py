@@ -3,7 +3,7 @@ import os
 
 app = Flask(__name__)
 
-
+# Получаем точный путь к папке, где лежит этот файл app.py
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 @app.route('/')
@@ -26,22 +26,41 @@ def home():
                 min-height: 100vh;
                 box-sizing: border-box;
                 font-family: sans-serif;
+                position: relative; /* Нужно для позиционирования номера телефона */
             }
             h1 {
                 margin: 0 0 20px 0;
             }
             img {
                 width: 100%;
-                /* 100vh — это вся высота экрана. Вычитаем 120px, чтобы влезла надпись и отступы */
-                max-height: calc(100vh - 120px); 
+                /* Резервируем 140px под заголовок сверху и номер снизу, чтобы ничего не накладывалось */
+                max-height: calc(100vh - 140px); 
                 object-fit: contain;
                 display: block;
+            }
+            .phone-number {
+                position: absolute;
+                bottom: 15px;
+                right: 20px;
+                font-size: 14px;
+                color: #555;
+            }
+            /* Стили для мобильных телефонов, чтобы номер не уезжал за экран */
+            @media (max-width: 480px) {
+                .phone-number {
+                    position: static;
+                    margin-top: 15px;
+                    text-align: right;
+                    width: 100%;
+                    font-size: 13px;
+                }
             }
         </style>
     </head>
     <body>
         <h1>Arseniy goat!!!</h1>
         <img src="/get-photo" alt="Arseniy Goat">
+        <div class="phone-number">номер телефона:+375 (33) 647-94-61</div>
     </body>
     </html>
     """
@@ -53,4 +72,3 @@ def get_photo():
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
-
