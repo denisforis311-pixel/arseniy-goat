@@ -3,6 +3,7 @@ import os
 
 app = Flask(__name__)
 
+# Получаем точный путь к папке, где лежит этот файл app.py
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 @app.route('/')
@@ -17,7 +18,7 @@ def home():
         <style>
             body {
                 margin: 0;
-                padding: 10px;
+                padding: 20px;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -28,36 +29,81 @@ def home():
                 background-color: #ffffff;
             }
             h1 {
-                margin: 10px 0 15px 0;
+                margin: 0 0 20px 0;
                 text-align: center;
-            }
-            .content-container {
                 width: 100%;
-                max-width: 800px;
+            }
+            /* Главный контейнер для текста и фото */
+            .main-container {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 40px; /* Отступ между текстом и фото */
+                width: 100%;
+                max-width: 1000px;
+                flex-wrap: wrap; /* Чтобы на мобилках текст переносился наверх */
+            }
+            /* Блок с характеристиками слева */
+            .info-list {
+                font-size: 18px;
+                line-height: 1.8;
+                font-weight: bold;
+                color: #222222;
+                min-width: 200px;
+            }
+            .info-item {
+                margin-bottom: 10px;
+            }
+            /* Правый блок с фото и номером */
+            .photo-wrapper {
                 display: flex;
                 flex-direction: column;
-                align-items: center;
+                align-items: flex-end;
+                flex: 1;
+                max-width: 600px;
+                min-width: 300px;
             }
             img {
                 width: 100%;
-                max-height: calc(100vh - 160px); 
+                max-height: calc(100vh - 180px); 
                 object-fit: contain;
                 display: block;
             }
             .phone-number {
-                align-self: flex-end;
                 margin-top: 10px;
                 font-size: 13px;
                 color: #666666;
                 font-weight: bold;
             }
+            /* Адаптив для мобильных устройств */
+            @media (max-width: 768px) {
+                .main-container {
+                    flex-direction: column;
+                    gap: 20px;
+                }
+                .info-list {
+                    text-align: center;
+                }
+            }
         </style>
     </head>
     <body>
         <h1>Arseniy goat!!!</h1>
-        <div class="content-container">
-            <img src="/get-photo" alt="Arseniy Goat">
-            <div class="phone-number">номер телефона:+375 (33) 647-94-61</div>
+        
+        <div class="main-container">
+            <!-- Блок с информацией слева -->
+            <div class="info-list">
+                <div class="info-item">1 Арсений Петруша</div>
+                <div class="info-item">2 174/14 см</div>
+                <div class="info-item">3 60 кг</div>
+            </div>
+            
+            <!-- Блок с фото и номером справа -->
+            <div class="photo-wrapper">
+                <img src="/get-photo" alt="Arseniy Goat">
+                <div class="phone-number">номер телефона:+375 (33) 647-94-61</div>
+            </div>
         </div>
     </body>
     </html>
