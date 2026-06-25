@@ -33,36 +33,35 @@ def home():
                 text-align: center;
                 width: 100%;
             }
-            /* Главный контейнер для текста и фото */
-            .main-container {
+            /* Контейнер по центру страницы, как было раньше */
+            .content-container {
                 display: flex;
                 flex-direction: row;
                 align-items: center;
                 justify-content: center;
-                gap: 40px; /* Отступ между текстом и фото */
+                gap: 30px; /* Расстояние между текстом и фото */
                 width: 100%;
-                max-width: 1000px;
-                flex-wrap: wrap; /* Чтобы на мобилках текст переносился наверх */
+                max-width: 900px;
+                position: relative;
             }
-            /* Блок с характеристиками слева */
+            /* Блок со строчками слева */
             .info-list {
                 font-size: 18px;
                 line-height: 1.8;
                 font-weight: bold;
                 color: #222222;
-                min-width: 200px;
+                white-space: nowrap; /* Чтобы строчки не переносились */
             }
             .info-item {
-                margin-bottom: 10px;
+                margin-bottom: 12px;
             }
-            /* Правый блок с фото и номером */
+            /* Блок с фото и номером */
             .photo-wrapper {
                 display: flex;
                 flex-direction: column;
                 align-items: flex-end;
-                flex: 1;
-                max-width: 600px;
-                min-width: 300px;
+                max-width: 550px;
+                width: 100%;
             }
             img {
                 width: 100%;
@@ -76,14 +75,17 @@ def home():
                 color: #666666;
                 font-weight: bold;
             }
-            /* Адаптив для мобильных устройств */
-            @media (max-width: 768px) {
-                .main-container {
+            /* Адаптивность для экранов мобильных */
+            @media (max-width: 680px) {
+                .content-container {
                     flex-direction: column;
-                    gap: 20px;
+                    gap: 15px;
                 }
                 .info-list {
                     text-align: center;
+                }
+                .photo-wrapper {
+                    align-items: center;
                 }
             }
         </style>
@@ -91,15 +93,15 @@ def home():
     <body>
         <h1>Arseniy goat!!!</h1>
         
-        <div class="main-container">
-            <!-- Блок с информацией слева -->
+        <div class="content-container">
+            <!-- Блок с текстом без цифр -->
             <div class="info-list">
-                <div class="info-item">1 Арсений Петруша</div>
-                <div class="info-item">2 174/14 см</div>
-                <div class="info-item">3 60 кг</div>
+                <div class="info-item">Арсений Петруша</div>
+                <div class="info-item">174/14 см</div>
+                <div class="info-item">60 кг</div>
             </div>
             
-            <!-- Блок с фото и номером справа -->
+            <!-- Блок с фото и номером телефона -->
             <div class="photo-wrapper">
                 <img src="/get-photo" alt="Arseniy Goat">
                 <div class="phone-number">номер телефона:+375 (33) 647-94-61</div>
