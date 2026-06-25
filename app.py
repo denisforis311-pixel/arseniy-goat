@@ -1,13 +1,20 @@
-from flask import Flask
+from flask import Flask,send_from_directory
 import os
+
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def home():
-    return "Arseniy goat!!!"
+    return "<h1>Arseniy goat!!!</h1><img src='/get-photo' style='max-width:100%;'>"
 
-if __name__ == '__main__':
-    # Этот кусок кода нужен, чтобы хостинг сам выделил свободный порт
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+
+@app.route('/get-photo')
+def get_photo():
+    return send_from_directory(os.getcwd(), 'photo. jpg')
+
+
+if name == '__main__':
+    port = int(os.environ.get('PORT',5000))
+    app.run(host='0.0.0.0',port=port)
