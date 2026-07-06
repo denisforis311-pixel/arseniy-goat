@@ -12,12 +12,14 @@ def home():
 def check_age():
     age = int(request.form['user_age'])
     
-    if age == 67:
+    if age >= 100:
+        return render_template('cb.html')
+    elif age ==67:
         return render_template('welcome.html')
-    elif age >=18:
+    elif age>=18:
         return render_template('arseniy.html')
     else:
-        return "Извините, этот сайт только для совершеннолетних."
+        return "Извините, этот сайт только для совершенно летних", 403
 
 @app.route('/get-photo')
 def get_photo():
