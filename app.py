@@ -16,6 +16,9 @@ def check_age():
         return render_template('arseniy.html')
     else:
         return "Извините, этот сайт только для совершеннолетних.", 403
+    if age == 67:
+        return "не ну ты еблан?"
+
 
 @app.route('/get-photo')
 def get_photo():
