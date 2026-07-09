@@ -21,16 +21,16 @@ app.post('/check-age', (req, res) => {
         res.sendFile(path.join(__dirname, 'templates', 'cb.html'));
     } 
     else if (age === 67) {
-        // Если ровно 67 — вторая пасхалка
+        
         res.sendFile(path.join(__dirname, 'templates', 'welcome.html'));
     } 
     else if (age >= 18) {
-        // Обычный проход для совершеннолетних
+        
         res.sendFile(path.join(__dirname, 'templates', 'arseniy.html'));
     } 
     else {
-        // Для несовершеннолетних (код ошибки 403)
-        res.status(403).send("Извините, этот сайт только для совершеннолетних.");
+        
+        res.status(403).sendFile(path.join(__dirname, 'templates','restricted.html'));
     }
 });
 
