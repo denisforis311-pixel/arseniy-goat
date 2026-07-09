@@ -1,8 +1,8 @@
 body {
     margin: 0;
     padding: 40px 20px;
-    background-color: #0d0e15; 
-    color: #e2e8f0;            
+    background-color: #0d0e15; /* Глубокий темный фон */
+    color: #e2e8f0;            /* Светлый текст */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
     flex-direction: column;
@@ -12,22 +12,65 @@ body {
 }
 
 h1, h2 {
-    color: #00f2fe; 
+    color: #00f2fe; /* Неоновый бирюзовый заголовок */
     text-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
     margin-bottom: 30px;
+    text-align: center;
 }
 
+/* Общий стиль для ВСЕХ карточек на сайте (включая окна входа и профиль Арсения) */
 .content-container, form {
     background: #151823; 
-    border: 1px solid #23283d;
-    border-radius: 16px; 
+    border: 2px solid #00f2fe; /* Тот самый бирюзовый ободок рамки! */
+    border-radius: 16px;       /* Красивые скругленные углы */
     padding: 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    max-width: 500px;
+    box-shadow: 0 0 20px rgba(0, 242, 254, 0.15); /* Бирюзовое мягкое свечение */
+    max-width: 550px;
     width: 100%;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрируем всё внутри рамки */
+    gap: 20px;
 }
 
+/* Блок со строчками информации */
+.info-list {
+    width: 100%;
+    text-align: center; /* Текст внутри рамки по центру */
+}
+
+.info-item {
+    margin-bottom: 12px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #e2e8f0;
+}
+
+/* Блок с фото */
+.photo-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: contain;
+    border-radius: 8px; /* Слегка скругляем края самой фотки */
+    border: 1px solid #23283d; /* Тонкая внутренняя граница для фото */
+}
+
+.phone-number {
+    margin-top: 15px;
+    font-size: 15px;
+    color: #00f2fe; /* Номер телефона тоже сделаем бирюзовым под стиль */
+    font-weight: bold;
+}
+
+/* Стили для инпутов и кнопок в окнах входа */
 input[type="number"] {
     background-color: #0d0e15;
     border: 2px solid #23283d;
@@ -38,7 +81,6 @@ input[type="number"] {
     width: 100%;
     box-sizing: border-box;
     transition: 0.3s;
-    margin-top: 10px;
 }
 
 input[type="number"]:focus {
@@ -48,7 +90,7 @@ input[type="number"]:focus {
 }
 
 button {
-    background: linear-gradient(45deg, #00f2fe, #4facfe); 
+    background: linear-gradient(45deg, #00f2fe, #4facfe);
     border: none;
     border-radius: 8px;
     color: #0d0e15;
@@ -58,28 +100,9 @@ button {
     cursor: pointer;
     transition: 0.2s;
     width: 100%;
-    margin-top: 20px;
 }
 
 button:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
-}
-
-.info-item {
-    margin-bottom: 12px;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-img {
-    width: 100%;
-    border-radius: 8px;
-    margin-top: 15px;
-}
-
-.phone-number {
-    margin-top: 10px;
-    font-size: 13px;
-    color: #888;
 }
