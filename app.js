@@ -34,6 +34,12 @@ app.post('/check-age', (req, res) => {
     }
 });
 
+app.post('/add-comment', (req,res) => {
+    const comment = req.body.user_comment;
+    console.log("Новый отзыв" + comment);
+    res.redirect('/')
+});
+
 app.get('/get-photo', (req, res) => {
     res.sendFile(path.join(__dirname, 'photo.jpg'));
 });
