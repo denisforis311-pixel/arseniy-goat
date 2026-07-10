@@ -1,37 +1,37 @@
 const express = require('express');
 const path = require('path');
-const fs = require('fs'); // Подключаем модуль файловой системы для работы с readFile
+const fs = require('fs'); 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Глобальная переменная для хранения отзыва в памяти сервера
+
 let globalComment = "Отзывов пока нет";
 
-// Учим сервер расшифровывать данные из HTML-форм
+
 app.use(express.urlencoded({ extended: true }));
 
-// Открываем прямой доступ к папке static для CSS-стилей
+
 app.use('/static', express.static(path.join(__dirname, 'static')));
 
-// 1. ГЛАВНАЯ СТРАНИЦА: Показываем экран ввода возраста
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'templates', 'age_check.html'));
 });
 
-// 2. ЛОГИКА ПРОВЕРКИ: Обработка возраста и вклейка отзывов
+
 app.post('/check-age', (req, res) => {
     const age = parseInt(req.body.user_age);
 
     if (age > 100) {
-        // Пасхалка про бабушку
-        res.sendFile(path.join(__dirname, 'templates', 'grandma.html'));
+        
+        res.sendFile(path.join(__dirname, 'templates', 'cb.html'));
     } 
     else if (age === 67) {
-        // Вторая пасхалка
-        res.sendFile(path.join(__dirname, 'templates', '67years.html'));
+        
+        res.sendFile(path.join(__dirname, 'templates', 'welcome.html'));
     } 
     else if (age >= 18) {
-        // Обычный вход: динамически читаем HTML и вклеиваем отзыв
+        
         const filePath = path.join(__dirname, 'templates', 'arseniy.html');
 
         fs.readFile(filePath, 'utf8', (err, htmlText) => {
