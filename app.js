@@ -1,7 +1,9 @@
+const fs = require('fs');
 const express = require('express');
 const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 5000;
+let globalComment = "Отзывов пока нет";
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -26,8 +28,17 @@ app.post('/check-age', (req, res) => {
     } 
     else if (age >= 18) {
         
-        res.sendFile(path.join(__dirname, 'templates', 'arseniy.html'));
-    } 
+        const filePath = path.join(__dirname, 'templates', 'arseniy.html');
+
+
+        fs.readFile(filePath, 'utf8', (error, htmlText) => {
+            if (err) return res.status(500).send("Ошибка чтения файла");
+            const updateHtml = htmlText.replace('{{COMMENT_PLACEHOLDER}}',globalComment);
+            res.send(updatedHtml);
+        });
+    }
+
+    
     else {
         
         res.status(403).sendFile(path.join(__dirname, 'templates','restricted.html'));
@@ -35,8 +46,8 @@ app.post('/check-age', (req, res) => {
 });
 
 app.post('/add-comment', (req,res) => {
-    const comment = req.body.user_comment;
-    console.log("Новый отзыв" + comment);
+    globalComment = req.body.user_comment;
+    console.log("Новый отзыв сохранен" + globalComment);
     res.redirect('/')
 });
 
