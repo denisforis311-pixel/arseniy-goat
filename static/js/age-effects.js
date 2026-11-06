@@ -1,9 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Подгружаем сохраненную тему на экранах верификации/заглушек
-    const savedTheme = localStorage.getItem('arseniy-app-theme');
-    if (savedTheme) {
-        document.body.classList.add(savedTheme);
-    }
+    const savedTheme = localStorage.getItem('arseniy-app-theme') || 'theme-cyan';
+    document.body.classList.add(savedTheme);
 
     const input = document.getElementById("age-input");
     const box = document.getElementById("age-box");
@@ -36,11 +33,20 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-/**
- * Дублируем функцию переключения темы для экранов заглушек, где нет основного скрипта main.js
- */
 window.setTheme = function(themeName) {
     document.body.classList.remove('theme-cyan', 'theme-emerald', 'theme-amethyst');
     document.body.classList.add(themeName);
     localStorage.setItem('arseniy-app-theme', themeName);
+}
+
+/**
+ * Функция циклического переключения тем для минималистичной кнопки
+ */
+window.toggleNextTheme = function() {
+    const themes = ['theme-cyan', 'theme-emerald', 'theme-amethyst'];
+    let currentTheme = localStorage.getItem('arseniy-app-theme') || 'theme-cyan';
+    
+    // Находим индекс следующей темы в массиве
+    let nextIndex = (themes.indexOf(currentTheme) + 1) % themes.length;
+    window.setTheme(themes[nextIndex]);
 }
