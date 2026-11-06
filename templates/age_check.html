@@ -13,6 +13,13 @@
             <input type="number" name="user_age" id="age-input" placeholder="Введите ваш возраст" required min="1" max="150">
             <button type="submit" class="premium-btn">Получить доступ</button>
         </form>
+
+        <!-- Быстрые настройки прямо на входе -->
+        <div style="display: flex; gap: 15px; margin-top: 10px;">
+            <div onclick="setTheme('theme-cyan')" style="width: 24px; height: 24px; border-radius: 50%; background: #00f2fe; cursor: pointer; box-shadow: 0 0 8px rgba(0,242,254,0.4); border: 2px solid #fff;"></div>
+            <div onclick="setTheme('theme-emerald')" style="width: 24px; height: 24px; border-radius: 50%; background: #34d399; cursor: pointer; box-shadow: 0 0 8px rgba(52,211,153,0.4); border: 2px solid #fff;"></div>
+            <div onclick="setTheme('theme-amethyst')" style="width: 24px; height: 24px; border-radius: 50%; background: #c084fc; cursor: pointer; box-shadow: 0 0 8px rgba(192,132,252,0.4); border: 2px solid #fff;"></div>
+        </div>
     </div>
     <script src="/static/js/age-effects.js"></script>
 </body>
