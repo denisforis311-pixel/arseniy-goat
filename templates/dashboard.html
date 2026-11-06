@@ -13,9 +13,11 @@
             <button class="menu-btn active" data-tab="tab-profile">👤 Профиль Босса</button>
             <button class="menu-btn" data-tab="tab-database">📂 База Отзывов</button>
             <button class="menu-btn" data-tab="tab-matrix">📊 Матрица Рофлов</button>
+            <button class="menu-btn" data-tab="tab-settings">⚙️ Настройки стиля</button>
             <button class="menu-btn logout-btn" onclick="window.location.href='/logout'">🚪 Сбежать</button>
         </aside>
         <main class="main-content">
+            <!-- ВКЛАДКА 1: ХАРАКТЕРИСТИКИ АРСЕНИЯ -->
             <section class="tab-content active" id="tab-profile">
                 <h2>ТТХ Объекта</h2>
                 <div class="profile-grid">
@@ -30,6 +32,8 @@
                     </div>
                 </div>
             </section>
+            
+            <!-- ВКЛАДКА 2: АРХИВ ОТЗЫВОВ -->
             <section class="tab-content" id="tab-database">
                 <h2>Глас Народа</h2>
                 <div class="comments-archive" id="comments-archive">{{COMMENTS_PLACEHOLDER}}</div>
@@ -39,11 +43,44 @@
                     <button type="submit" class="premium-btn">Записать</button>
                 </form>
             </section>
+            
+            <!-- ВКЛАДКА 3: ЦЕНТР УПРАВЛЕНИЯ РОФЛАМИ -->
             <section class="tab-content" id="tab-matrix">
                 <h2>Центр Управления</h2>
                 <div class="stats-banner">Просмотров: <strong>{{TOTAL_VIEWS}}</strong> | Пропущено инвесторов: <strong>{{PASSED_CHECKS}}</strong></div>
                 <div class="meme-ticker"><p id="meme-ticker-text">« {{RANDOM_MEME}} »</p></div>
                 <button class="premium-btn" id="roll-meme-btn">Сгенерировать Истину</button>
+            </section>
+
+            <!-- ВКЛАДКА 4: НАСТРОЙКИ ТЕМЫ -->
+            <section class="tab-content" id="tab-settings">
+                <h2>Кастомизация Ядра</h2>
+                <div class="stats-banner">
+                    Выберите визуальный интерфейс для отображения параметров Арсения. Настройки сохраняются локально.
+                </div>
+                <div class="profile-info" style="gap: 20px; width: 100%;">
+                    <div class="stat-card" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;" onclick="setTheme('theme-cyan')">
+                        <div>
+                            <div class="stat-value" style="color: #00f2fe;">Cyan Drive</div>
+                            <div class="stat-label" style="margin-top: 5px;">Стандартный премиальный бирюзовый неон</div>
+                        </div>
+                        <div style="width: 20px; height: 20px; border-radius: 50%; background: #00f2fe; box-shadow: 0 0 10px #00f2fe;"></div>
+                    </div>
+                    <div class="stat-card" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;" onclick="setTheme('theme-emerald')">
+                        <div>
+                            <div class="stat-value" style="color: #34d399;">Toxic Mint</div>
+                            <div class="stat-label" style="margin-top: 5px;">Кислотно-зеленый цифровой изумруд</div>
+                        </div>
+                        <div style="width: 20px; height: 20px; border-radius: 50%; background: #34d399; box-shadow: 0 0 10px #34d399;"></div>
+                    </div>
+                    <div class="stat-card" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;" onclick="setTheme('theme-amethyst')">
+                        <div>
+                            <div class="stat-value" style="color: #c084fc;">Aura Amethyst</div>
+                            <div class="stat-label" style="margin-top: 5px;">Люксовый пурпурно-аметистовый sunset</div>
+                        </div>
+                        <div style="width: 20px; height: 20px; border-radius: 50%; background: #c084fc; box-shadow: 0 0 10px #c084fc;"></div>
+                    </div>
+                </div>
             </section>
         </main>
     </div>
