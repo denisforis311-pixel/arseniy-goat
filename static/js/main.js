@@ -83,13 +83,17 @@ function dropGoatRain() {
     }
 }
 
-/**
- * Переключение тем оформления (Вынесено в глобал, чтобы работало из инлайна HTML)
- */
 window.setTheme = function(themeName) {
     document.body.classList.remove('theme-cyan', 'theme-emerald', 'theme-amethyst');
     document.body.classList.add(themeName);
     localStorage.setItem('arseniy-app-theme', themeName);
+}
+
+window.toggleNextTheme = function() {
+    const themes = ['theme-cyan', 'theme-emerald', 'theme-amethyst'];
+    let currentTheme = localStorage.getItem('arseniy-app-theme') || 'theme-cyan';
+    let nextIndex = (themes.indexOf(currentTheme) + 1) % themes.length;
+    window.setTheme(themes[nextIndex]);
 }
 
 function loadSavedTheme() {
