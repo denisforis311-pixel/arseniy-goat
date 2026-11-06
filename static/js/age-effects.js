@@ -1,4 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // Подгружаем сохраненную тему на экране входа
+    const savedTheme = localStorage.getItem('arseniy-app-theme');
+    if (savedTheme) {
+        document.body.classList.add(savedTheme);
+    }
+
     const input = document.getElementById("age-input");
     const box = document.getElementById("age-box");
     const title = document.getElementById("age-title");
@@ -10,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
         box.style.transform = "none";
         box.style.filter = "none";
         title.innerText = "Подтвердите свой возраст";
-        title.style.color = "var(--neon-cyan)";
+        title.style.color = "var(--text-white)";
 
         if (isNaN(val)) return;
         if (val === 67) {
