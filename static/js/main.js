@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initTabSystem();
     initCommentSystem();
     initInteractiveMatrix();
+    loadSavedTheme();
 });
 
 function initTabSystem() {
@@ -79,5 +80,21 @@ function dropGoatRain() {
         el.style.animation = `fall ${dur}s linear forwards`;
         document.body.appendChild(el);
         setTimeout(() => el.remove(), dur * 1000);
+    }
+}
+
+/**
+ * Переключение тем оформления
+ */
+function setTheme(themeName) {
+    document.body.classList.remove('theme-cyan', 'theme-emerald', 'theme-amethyst');
+    document.body.classList.add(themeName);
+    localStorage.setItem('arseniy-app-theme', themeName);
+}
+
+function loadSavedTheme() {
+    const savedTheme = localStorage.getItem('arseniy-app-theme');
+    if (savedTheme) {
+        setTheme(savedTheme);
     }
 }
