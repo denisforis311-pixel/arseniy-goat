@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARSENIY CORE v2.0</title>
+    <link rel="stylesheet" href="/static/css/global.css">
+</head>
+<body>
+    <h1>ARSENIY CORE v2.0</h1>
+    <div class="dashboard-layout">
+        <aside class="sidebar-menu">
+            <button class="menu-btn active" data-tab="tab-profile">👤 Профиль Босса</button>
+            <button class="menu-btn" data-tab="tab-database">📂 База Отзывов</button>
+            <button class="menu-btn" data-tab="tab-matrix">📊 Матрица Рофлов</button>
+            <button class="menu-btn logout-btn" onclick="window.location.href='/logout'">🚪 Сбежать</button>
+        </aside>
+        <main class="main-content">
+            <section class="tab-content active" id="tab-profile">
+                <h2>ТТХ Объекта</h2>
+                <div class="profile-grid">
+                    <div class="profile-info">
+                        <div class="stat-card"><div class="stat-label">Идентификатор</div><div class="stat-value">Арсений Петруша</div></div>
+                        <div class="stat-card"><div class="stat-label">Габариты (Рост/Калибр)</div><div class="stat-value">174 / <span class="secret-stat">14 см</span></div></div>
+                        <div class="stat-card"><div class="stat-label">Масса брутто</div><div class="stat-value">60 кг</div></div>
+                    </div>
+                    <div class="profile-photo-zone">
+                        <img src="/get-photo" id="boss-photo">
+                        <a href="tel:+375336479461" class="phone-link">📞 +375 (33) 647-94-61</a>
+                    </div>
+                </div>
+            </section>
+            <section class="tab-content" id="tab-database">
+                <h2>Глас Народа</h2>
+                <div class="comments-archive" id="comments-archive">{{COMMENTS_PLACEHOLDER}}</div>
+                <form id="ajax-comment-form" class="ajax-form">
+                    <input type="text" id="comment-author" placeholder="Твой псевдоним" maxlength="30">
+                    <input type="text" id="comment-text" placeholder="Текст отзыва..." required maxlength="200">
+                    <button type="submit" class="premium-btn">Записать</button>
+                </form>
+            </section>
+            <section class="tab-content" id="tab-matrix">
+                <h2>Центр Управления</h2>
+                <div class="stats-banner">Просмотров: <strong>{{TOTAL_VIEWS}}</strong> | Пропущено инвесторов: <strong>{{PASSED_CHECKS}}</strong></div>
+                <div class="meme-ticker"><p id="meme-ticker-text">« {{RANDOM_MEME}} »</p></div>
+                <button class="premium-btn" id="roll-meme-btn">Сгенерировать Истину</button>
+            </section>
+        </main>
+    </div>
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
