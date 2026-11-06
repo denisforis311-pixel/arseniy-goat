@@ -84,9 +84,9 @@ function dropGoatRain() {
 }
 
 /**
- * Переключение тем оформления
+ * Переключение тем оформления (Вынесено в глобал, чтобы работало из инлайна HTML)
  */
-function setTheme(themeName) {
+window.setTheme = function(themeName) {
     document.body.classList.remove('theme-cyan', 'theme-emerald', 'theme-amethyst');
     document.body.classList.add(themeName);
     localStorage.setItem('arseniy-app-theme', themeName);
@@ -95,6 +95,6 @@ function setTheme(themeName) {
 function loadSavedTheme() {
     const savedTheme = localStorage.getItem('arseniy-app-theme');
     if (savedTheme) {
-        setTheme(savedTheme);
+        window.setTheme(savedTheme);
     }
 }
