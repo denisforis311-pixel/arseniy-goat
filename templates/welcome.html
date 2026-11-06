@@ -2,12 +2,21 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/global.css">
 </head>
 <body>
     <div class="standalone-container" style="border-color:#ef4444;">
         <h2 style="color:#ef4444;">Ты че еблан? 🤨</h2>
         <button class="premium-btn" style="background:linear-gradient(45deg, #ef4444, #b91c1c);color:#fff;" onclick="window.location.href='/'">Назад</button>
+        
+        <div style="display: flex; gap: 15px; margin-top: 5px;">
+            <div onclick="setTheme('theme-cyan')" style="width: 20px; height: 20px; border-radius: 50%; background: #00f2fe; cursor: pointer; border: 1px solid #fff;"></div>
+            <div onclick="setTheme('theme-emerald')" style="width: 20px; height: 20px; border-radius: 50%; background: #34d399; cursor: pointer; border: 1px solid #fff;"></div>
+            <div onclick="setTheme('theme-amethyst')" style="width: 20px; height: 20px; border-radius: 50%; background: #c084fc; cursor: pointer; border: 1px solid #fff;"></div>
+        </div>
     </div>
+    <script src="/static/js/age-effects.js"></script>
 </body>
 </html>
+
