@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Подгружаем сохраненную тему на экране входа
+    // Подгружаем сохраненную тему на экранах верификации/заглушек
     const savedTheme = localStorage.getItem('arseniy-app-theme');
     if (savedTheme) {
         document.body.classList.add(savedTheme);
@@ -35,3 +35,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+/**
+ * Дублируем функцию переключения темы для экранов заглушек, где нет основного скрипта main.js
+ */
+window.setTheme = function(themeName) {
+    document.body.classList.remove('theme-cyan', 'theme-emerald', 'theme-amethyst');
+    document.body.classList.add(themeName);
+    localStorage.setItem('arseniy-app-theme', themeName);
+}
