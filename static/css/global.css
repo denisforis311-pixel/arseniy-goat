@@ -1,10 +1,11 @@
 /**
  * ============================================================================
- * ARSENIY SYSTEMS v2.0 - GLASSMORPHISM PREMIUM INTERFACE
+ * ARSENIY SYSTEMS v2.0 - GLASSMORPHISM PREMIUM INTERFACE WITH THEMES
  * ============================================================================
  */
 
-:root {
+/* Дефолтная тема: Cyan Drive */
+:root, body.theme-cyan {
     --bg-base: #06070d;
     --bg-glass: rgba(18, 22, 39, 0.55);
     --bg-glass-hover: rgba(26, 32, 57, 0.75);
@@ -18,6 +19,27 @@
     --glass-border: rgba(0, 242, 254, 0.15);
     --glass-border-hover: rgba(0, 242, 254, 0.4);
     --transition-premium: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    --bg-gradient: radial-gradient(circle at 10% 20%, rgba(0, 242, 254, 0.05) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(79, 172, 254, 0.05) 0%, transparent 40%);
+}
+
+/* Тема 2: Toxic Mint */
+body.theme-emerald {
+    --neon-cyan: #34d399;
+    --neon-blue: #059669;
+    --neon-glow: rgba(52, 211, 153, 0.25);
+    --glass-border: rgba(52, 211, 153, 0.15);
+    --glass-border-hover: rgba(52, 211, 153, 0.4);
+    --bg-gradient: radial-gradient(circle at 10% 20%, rgba(52, 211, 153, 0.05) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(5, 150, 105, 0.05) 0%, transparent 40%);
+}
+
+/* Тема 3: Aura Amethyst */
+body.theme-amethyst {
+    --neon-cyan: #c084fc;
+    --neon-blue: #7c3aed;
+    --neon-glow: rgba(192, 132, 252, 0.25);
+    --glass-border: rgba(192, 132, 252, 0.15);
+    --glass-border-hover: rgba(192, 132, 252, 0.4);
+    --bg-gradient: radial-gradient(circle at 10% 20%, rgba(192, 132, 252, 0.05) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(124, 58, 237, 0.05) 0%, transparent 40%);
 }
 
 * {
@@ -27,12 +49,9 @@
     user-select: none;
 }
 
-/* Элитный анимированный фон */
 body {
     background-color: var(--bg-base);
-    background-image: 
-        radial-gradient(circle at 10% 20%, rgba(0, 242, 254, 0.05) 0%, transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(79, 172, 254, 0.05) 0%, transparent 40%);
+    background-image: var(--bg-gradient);
     color: var(--text-main);
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     min-height: 100vh;
@@ -43,7 +62,6 @@ body {
     overflow-x: hidden;
 }
 
-/* Заголовки с эффектом глубокого неонового напыления */
 h1 {
     font-size: 3rem;
     font-weight: 900;
@@ -65,7 +83,6 @@ h2 {
     text-align: left;
 }
 
-/* Ультимативный стеклянный контейнер (Вход, Баны) */
 .standalone-container {
     background: var(--bg-glass);
     border: 1px solid var(--glass-border);
@@ -89,7 +106,6 @@ h2 {
     box-shadow: 0 30px 60px rgba(0, 242, 254, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
-/* Архитектура Дашборда (Сетка) */
 .dashboard-layout {
     display: flex;
     gap: 30px;
@@ -98,7 +114,6 @@ h2 {
     margin-top: 10px;
 }
 
-/* Меню (Слева) */
 .sidebar-menu {
     flex: 0 0 280px;
     background: var(--bg-glass);
@@ -138,7 +153,7 @@ h2 {
 
 .menu-btn.active {
     background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-blue) 100%);
-    color: #05060a;
+    color: #06070d;
     font-weight: 700;
     box-shadow: 0 0 25px var(--neon-glow);
 }
@@ -155,7 +170,6 @@ h2 {
     color: #ffffff;
 }
 
-/* Контент-зона (Справа) */
 .main-content {
     flex: 1;
     background: var(--bg-glass);
@@ -171,7 +185,6 @@ h2 {
 .tab-content { display: none; flex-direction: column; gap: 30px; animation: scaleUp 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
 .tab-content.active { display: flex; }
 
-/* Карточки ТТХ */
 .profile-grid { display: flex; gap: 40px; }
 .profile-info { flex: 1; display: flex; flex-direction: column; gap: 16px; }
 
@@ -204,7 +217,6 @@ h2 {
     color: var(--text-white);
 }
 
-/* Секретное увеличение 14 см */
 .secret-stat {
     display: inline-block;
     transition: var(--transition-premium);
@@ -215,7 +227,6 @@ h2 {
     text-shadow: 0 0 15px rgba(52, 211, 153, 0.4);
 }
 
-/* Фото босса */
 .profile-photo-zone { flex: 0 0 280px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
 .profile-photo-zone img {
     width: 100%;
@@ -248,7 +259,6 @@ h2 {
     box-shadow: 0 0 15px var(--neon-glow);
 }
 
-/* Стенка комментариев */
 .comments-archive {
     max-height: 300px;
     overflow-y: auto;
@@ -276,7 +286,6 @@ h2 {
 .db-comment-time { color: var(--text-muted); }
 .db-comment-text { font-style: italic; color: #cbd5e1; line-height: 1.5; }
 
-/* Формы, Инпуты, Кнопки */
 .ajax-form { display: flex; flex-direction: column; gap: 14px; width: 100%; }
 
 input[type="number"], input[type="text"] {
@@ -315,7 +324,6 @@ button.premium-btn:hover {
     box-shadow: 0 12px 30px var(--neon-glow);
 }
 
-/* Статистика и информеры */
 .stats-banner {
     background: rgba(0, 242, 254, 0.02);
     border: 1px dashed rgba(0, 242, 254, 0.2);
@@ -338,7 +346,6 @@ button.premium-btn:hover {
     box-shadow: inset 5px 0 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Анимации */
 @keyframes scaleUp {
     from { opacity: 0; transform: scale(0.98) translateY(10px); }
     to { opacity: 1; transform: scale(1) translateY(0); }
@@ -347,10 +354,10 @@ button.premium-btn:hover {
 .falling-goat {
     position: fixed;
     z-index: 9999;
-    pointer-events: none;
-    animation: fall linear forwards;
-    filter: drop-shadow(0 0 8px rgba(0, 242, 254, 0.3));
+pointer-events: none;
+animation: fall linear forwards;
+filter: drop-shadow(0 0 8px rgba(0, 242, 254, 0.3));
 }
 @keyframes fall {
-    to { transform: translateY(calc(100vh + 100px)) rotate(360deg); }
+to { transform: translateY(calc(100vh + 100px)) rotate(360deg); }
 }
