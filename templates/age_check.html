@@ -10,7 +10,8 @@
     <div class="standalone-container" id="age-box">
         <h2 id="age-title">Подтвердите свой возраст</h2>
         <form action="/check-age" method="POST" class="ajax-form">
-            <input type="number" name="user_age" id="age-input" placeholder="Введите ваш возраст" required min="1" max="150">
+            <!-- Тут строго стоит type="text", чтобы браузер разрешал вводить и числа, и буквы -->
+            <input type="text" name="user_age" id="age-input" placeholder="Введите ваш возраст" required autocomplete="off">
             <button type="submit" class="premium-btn">Получить доступ</button>
         </form>
 
