@@ -9,26 +9,26 @@ document.addEventListener("DOMContentLoaded", () => {
     const portal = document.getElementById("portal-element");
 
     // ========================================================================
-    // НАСТОЯЩЕЕ ВЫПЛЕВЫВАНИЕ ОКНА ПРИ ЗАГРУЗКЕ
+    // НАСТОЯЩИЙ НАПРАВЛЕННЫЙ ВЫЛЕТ (ВЫПЛЕВЫВАНИЕ) ИЗ ЦЕНТРА ПОРТАЛА
     // ========================================================================
     if (portal && box) {
-        // Зажигаем портал на месте
+        // Мгновенно разворачиваем кислотный вихрь Рика на заднем плане
         portal.classList.add("active");
         
-        // Окно вылетает из портала вперед независимо
+        // Окно физически вылетает из глубины вихря прямо на пользователя
         setTimeout(() => {
             box.classList.add("portal-spawned");
         }, 150);
 
-        // Через 1.3 секунды плавно тушим портал, оставляя окно
+        // Когда окно полностью долетело и встало на место, закрываем портал
         setTimeout(() => {
             portal.classList.add("fade-out");
-        }, 1300);
+        }, 1400);
 
-        // Полная очистка классов
+        // Полное зачищение технических классов
         setTimeout(() => {
             portal.classList.remove("active", "fade-out");
-        }, 2500);
+        }, 2600);
     }
 
     if (input && box && title) {
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ========================================================================
-    // ЭФФЕКТ ЧИСТОГО ЗАСАСЫВАНИЯ ОКНА ПРИ ОТПРАВКЕ
+    // КИНЕМАТОГРАФИЧНОЕ ЗАСАСЫВАНИЕ КАРТОЧКИ В СИНГУЛЯРНОСТЬ ВЫ С ГЛАЗА ЮЗЕРА
     // ========================================================================
     if (form && portal && box) {
         form.addEventListener("submit", (e) => {
@@ -67,16 +67,16 @@ document.addEventListener("DOMContentLoaded", () => {
             portal.classList.remove("fade-out");
             portal.classList.add("active");
 
-            // Окно закручивается и улетает вглубь портала
+            // Окно плавно закручивается по спирали и уменьшается в нулевую точку центра
             setTimeout(() => {
                 box.classList.remove("portal-spawned");
                 box.classList.add("portal-sucked");
             }, 50);
 
-            // Редирект/отправка строго после окончания анимации засасывания
+            // Отправка формы происходит только когда окно полностью скрылось внутри вихря
             setTimeout(() => {
                 form.submit();
-            }, 1800);
+            }, 1600);
         });
     }
 });
@@ -96,7 +96,7 @@ window.triggerPortalRedirect = function(url) {
         
         setTimeout(() => {
             window.location.href = url;
-        }, 1800);
+        }, 1600);
     } else {
         window.location.href = url;
     }
