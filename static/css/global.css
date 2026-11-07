@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * ARSENIY SYSTEMS v2.0 - CINEMATIC MORTY PORTAL INTERFACE (3D EFFECT)
+ * ARSENIY SYSTEMS v2.0 - ORIGINAL RICK & MORTY PORTAL EFFECT
  * ============================================================================
  */
 
@@ -57,7 +57,7 @@ body {
     align-items: center;
     padding: 60px 20px;
     overflow-x: hidden;
-    perspective: 1600px; /* Глубокая 3D-перспектива для вылетающих окон */
+    perspective: 1200px; /* Дает глубину при вылете окон */
 }
 
 h1 {
@@ -81,7 +81,7 @@ h2 {
     text-align: left;
 }
 
-/* ФУНДАМЕНТАЛЬНОЕ ОКНО С ПОДДЕРЖКОЙ ВЫЛЕТА ИЗ ЦЕНТРА ПОРТАЛА */
+/* Окна входа вылетают независимо ПОВЕРХ портала */
 .standalone-container {
     background: var(--bg-glass);
     border: 1px solid var(--glass-border);
@@ -89,7 +89,7 @@ h2 {
     -webkit-backdrop-filter: blur(25px);
     border-radius: 24px;
     padding: 45px;
-    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
     max-width: 480px;
     width: 100%;
     display: flex;
@@ -97,25 +97,25 @@ h2 {
     align-items: center;
     gap: 30px;
     margin-top: 8vh;
-    z-index: 20; /* Окно всегда парит ПЕРЕД порталом */
+    z-index: 20; /* Окна СТРОГО поверх портала */
     
-    /* Начальная точка: зажато глубоко внутри портала, невидимо и уменьшено */
-    transform: scale(0.01) translateZ(-1000px) rotate(45deg);
+    /* Точка старта: окно сжато в центре портала */
+    transform: scale(0) translateZ(-500px) rotate(-45deg);
     opacity: 0;
-    transition: var(--transition-premium), transform 1.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 1.2s ease;
+    transition: var(--transition-premium), transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.8s ease;
 }
 
-/* Анимация триггера: выплевывание вперед на пользователя */
+/* Выплевывание: окно разворачивается поверх всего */
 .standalone-container.portal-spawned {
     transform: scale(1) translateZ(0) rotate(0deg);
     opacity: 1;
 }
 
-/* Анимация триггера: засасывание обратно глубоко внутрь центра вихря */
+/* Засасывание: окно уменьшается и улетает обратно в центр */
 .standalone-container.portal-sucked {
-    transform: scale(0.01) translateZ(-1200px) rotate(-180deg) translateY(-40px);
+    transform: scale(0) translateZ(-600px) rotate(180deg);
     opacity: 0;
-    transition: transform 1.5s cubic-bezier(0.55, 0, 1, 0.45), opacity 1s ease;
+    transition: transform 1.2s cubic-bezier(0.6, -0.28, 0.735, 0.045), opacity 0.8s ease;
 }
 
 .standalone-container:hover {
@@ -124,57 +124,49 @@ h2 {
 }
 
 /* ============================================================================
- * АУТЕНТИЧНЫЙ 3D ПОРТАЛ ИЗ РИК И МОРТИ (ФОРМА КЛЯКСЫ + ЖИДКИЙ ГРАДИЕНТ)
+ * ОРИГИНАЛЬНЫЙ СУПЕР-ПОРТАЛ ИЗ МУЛЬТФИЛЬМА (НАСТОЯЩАЯ ТЕКСТУРА)
  * ============================================================================
  */
 .morty-portal {
     position: fixed;
-    top: 48%;
+    top: 46%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
-    /* Вертикально вытянутая каноничная форма кляксы Рика */
-    width: 580px;
+    width: 680px;
     height: 680px;
-    border-radius: 48% 52% 51% 49% / 55% 53% 47% 45%;
-    
-    /* Сложное многослойное органическое свечение портала */
-    background: radial-gradient(circle at 50% 50%, #adff2f 0%, #00ff66 25%, #009933 55%, #013b11 80%, transparent 100%);
-    z-index: 1; /* Строго под карточкой интерфейса */
+    z-index: 1; /* Под окнами интерфейса */
     pointer-events: none;
     opacity: 0;
-    filter: drop-shadow(0 0 70px rgba(0, 255, 102, 0.65));
-    transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.6s ease;
+    
+    /* Загружаем оригинальную текстуру портала с прозрачным фоном */
+    background-image: url('https://wikimedia.org');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    /* Ядерное зеленое свечение вокруг картинки */
+    filter: drop-shadow(0 0 60px rgba(52, 211, 153, 0.6));
+    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease;
 }
 
-/* Полный разворот портала из измерения */
+/* Включение портала и бешеное мультяшное вращение */
 .morty-portal.active {
-    transform: translate(-50%, -50%) scale(1.15);
-    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 0.95;
+    animation: realPortalSpin 1.8s linear infinite;
 }
 
-/* Плавный схлопывающийся уход обратно в сингулярность */
+/* Плавное закрытие портала */
 .morty-portal.fade-out {
     transform: translate(-50%, -50%) scale(0);
     opacity: 0;
-    transition: transform 1.4s cubic-bezier(0.6, -0.28, 0.735, 0.045), opacity 0.8s ease;
+    transition: transform 1s cubic-bezier(0.6, -0.28, 0.735, 0.045), opacity 0.6s ease;
 }
 
-/* Спиральная жидкая текстура, вращающаяся внутри кляксы */
-.morty-portal::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: inherit;
-    background: repeating-conic-gradient(from 0deg, rgba(173, 255, 47, 0.35) 0deg 15deg, transparent 15deg 35deg, rgba(0, 255, 102, 0.25) 35deg 55deg);
-    animation: portalVortexSpin 2.2s linear infinite;
-    filter: blur(4px);
+@keyframes realPortalSpin {
+    100% { transform: translate(-50%, -50%) rotate(360deg) scale(1.1); }
 }
-
-@keyframes portalVortexSpin {
-    100% { transform: rotate(360deg); }
-}
-/* Вставляй эту часть строго под первой частью */
+/* Вставляй эту часть строго под первой частью в глобал CSS */
 
 .dashboard-layout {
     display: flex;
