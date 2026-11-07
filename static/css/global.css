@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * ARSENIY SYSTEMS v2.0 - PREMIUM INTERFACE + ADVANCED PORTAL PHYSICS
+ * ARSENIY SYSTEMS v2.0 - GLASSMORPHISM PREMIUM INTERFACE + FIXED PORTAL PHYSICS
  * ============================================================================
  */
 
@@ -57,7 +57,7 @@ body {
     align-items: center;
     padding: 60px 20px;
     overflow-x: hidden;
-    perspective: 1000px;
+    perspective: 1200px;
 }
 
 h1 {
@@ -81,6 +81,7 @@ h2 {
     text-align: left;
 }
 
+/* ОПТИМИЗИРОВАННАЯ КАРТОЧКА ОКНА (ВЫЛЕТАЕТ НЕЗАВИСИМО) */
 .standalone-container {
     background: var(--bg-glass);
     border: 1px solid var(--glass-border);
@@ -97,9 +98,11 @@ h2 {
     gap: 30px;
     margin-top: 8vh;
     z-index: 10;
-    transform: scale(0) rotate(-180deg) translateZ(-500px);
+    
+    /* Изначально сжата в глубине экрана для эффекта выплевывания */
+    transform: scale(0) rotate(-70deg) translateZ(-400px);
     opacity: 0;
-    transition: var(--transition-premium), transform 2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 1.5s ease;
+    transition: var(--transition-premium), transform 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.15), opacity 1s ease;
 }
 
 .standalone-container.portal-spawned {
@@ -108,9 +111,9 @@ h2 {
 }
 
 .standalone-container.portal-sucked {
-    transform: scale(0) rotate(540deg) translateZ(-800px) translateY(-50px);
+    transform: scale(0) rotate(360deg) translateZ(-500px) translateY(-30px);
     opacity: 0;
-    transition: transform 2.2s cubic-bezier(0.76, 0, 0.24, 1), opacity 1.5s ease;
+    transition: transform 1.8s cubic-bezier(0.6, -0.28, 0.735, 0.045), opacity 1.2s ease;
 }
 
 .standalone-container:hover {
@@ -118,6 +121,10 @@ h2 {
     box-shadow: 0 30px 60px rgba(0, 242, 254, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
+/* ============================================================================
+ * ИЗОЛИРОВАННЫЙ КРУТЯЩИЙСЯ ПОРТАЛ (СТРОГО НА МЕСТЕ ЗА ОКНОМ)
+ * ============================================================================
+ */
 .morty-portal {
     position: fixed;
     top: 45%;
@@ -125,41 +132,42 @@ h2 {
     transform: translate(-50%, -50%) scale(0);
     width: 650px;
     height: 650px;
-    background: radial-gradient(circle, #00ff88 15%, #00aa55 45%, #023311 65%, transparent 75%);
+    background: radial-gradient(circle, #00ff88 10%, #00aa55 40%, #023311 60%, transparent 70%);
     border-radius: 50%;
-    z-index: 1;
+    z-index: 1; /* Полностью под карточкой */
     pointer-events: none;
     opacity: 0;
-    box-shadow: 0 0 100px rgba(0, 255, 136, 0.6), inset 0 0 80px rgba(0, 170, 85, 0.5);
-    transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.8s ease;
+    box-shadow: 0 0 80px rgba(0, 255, 136, 0.5), inset 0 0 60px rgba(0, 170, 85, 0.4);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
 }
 
 .morty-portal.active {
-    transform: translate(-50%, -50%) scale(1.1);
+    transform: translate(-50%, -50%) scale(1);
     opacity: 0.75;
-    animation: portalRotate 6s linear infinite;
 }
 
 .morty-portal.fade-out {
     transform: translate(-50%, -50%) scale(0);
     opacity: 0;
-    transition: transform 1.5s cubic-bezier(0.36, 0, 0.66, -0.56), opacity 1s ease;
+    transition: transform 1.2s cubic-bezier(0.6, -0.28, 0.735, 0.045), opacity 0.8s ease;
 }
 
+/* Вращение вихря вынесено на отдельный слой псевдоэлемента, чтобы не крутить саму разметку */
 .morty-portal::before {
     content: '';
     position: absolute;
     width: 100%;
     height: 100%;
-    background: repeating-conic-gradient(from 0deg, rgba(0,255,136,0.15) 0deg 20deg, transparent 20deg 40deg);
+    background: repeating-conic-gradient(from 0deg, rgba(0,255,136,0.2) 0deg 15deg, transparent 15deg 30deg);
     border-radius: 50%;
-    animation: portalVortex 2s linear infinite;
-    filter: blur(2px);
+    animation: vortexSpin 3s linear infinite;
+    filter: blur(3px);
 }
 
-@keyframes portalRotate { 100% { transform: translate(-50%, -50%) rotate(360deg) scale(1.1); } }
-@keyframes portalVortex { 100% { transform: rotate(-360deg); } }
-/* Вставляй это строго под первой частью */
+@keyframes vortexSpin {
+    100% { transform: rotate(360deg); }
+}
+/* Вставляй строго под первой частью */
 
 .dashboard-layout {
     display: flex;
