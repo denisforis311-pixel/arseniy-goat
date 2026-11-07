@@ -6,11 +6,9 @@
     <link rel="stylesheet" href="/static/css/global.css">
 </head>
 <body>
-    <div class="morty-portal" id="portal-element"></div>
-
     <div class="standalone-container" id="age-box">
         <h2>Да у меня бабка и то младше! 👵</h2>
-        <button class="premium-btn" onclick="triggerPortalRedirect('/')">Назад</button>
+        <button class="premium-btn" onclick="window.location.href='/'">Назад</button>
         
         <div onclick="toggleNextTheme()" style="color: var(--text-muted); font-size: 12px; cursor: pointer; padding: 5px 10px; border-radius: 20px; transition: var(--transition-premium); margin-top: 5px; border: 1px solid rgba(255,255,255,0.02); background: rgba(0,0,0,0.1);" onmouseover="this.style.color='var(--neon-cyan)', this.style.borderColor='rgba(0,242,254,0.1)'" onmouseout="this.style.color='var(--text-muted)', this.style.borderColor='rgba(255,255,255,0.02)'">
             🎨 Сменить интерфейс
