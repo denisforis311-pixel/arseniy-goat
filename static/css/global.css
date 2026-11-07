@@ -1,42 +1,42 @@
 /**
  * ============================================================================
- * ARSENIY SYSTEMS v2.0 - GLASSMORPHISM PREMIUM INTERFACE + FIXED PORTAL PHYSICS
+ * ARSENIY SYSTEMS v2.0 - CINEMATIC MORTY PORTAL INTERFACE (3D EFFECT)
  * ============================================================================
  */
 
 :root, body.theme-cyan {
-    --bg-base: #06070d;
-    --bg-glass: rgba(18, 22, 39, 0.55);
-    --bg-glass-hover: rgba(26, 32, 57, 0.75);
-    --bg-inner: rgba(5, 6, 10, 0.6);
+    --bg-base: #05060a;
+    --bg-glass: rgba(15, 18, 32, 0.6);
+    --bg-glass-hover: rgba(22, 27, 49, 0.8);
+    --bg-inner: rgba(4, 5, 8, 0.75);
     --neon-cyan: #00f2fe;
     --neon-blue: #4facfe;
     --neon-glow: rgba(0, 242, 254, 0.25);
     --text-white: #ffffff;
-    --text-main: #e2e8f0;
-    --text-muted: #64748b;
-    --glass-border: rgba(0, 242, 254, 0.15);
-    --glass-border-hover: rgba(0, 242, 254, 0.4);
-    --transition-premium: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    --bg-gradient: radial-gradient(circle at 10% 20%, rgba(0, 242, 254, 0.05) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(79, 172, 254, 0.05) 0%, transparent 40%);
+    --text-main: #cbd5e1;
+    --text-muted: #475569;
+    --glass-border: rgba(0, 242, 254, 0.12);
+    --glass-border-hover: rgba(0, 242, 254, 0.35);
+    --transition-premium: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    --bg-gradient: radial-gradient(circle at 15% 15%, rgba(0, 242, 254, 0.04) 0%, transparent 45%), radial-gradient(circle at 85% 85%, rgba(79, 172, 254, 0.04) 0%, transparent 45%);
 }
 
 body.theme-emerald {
     --neon-cyan: #34d399;
     --neon-blue: #059669;
     --neon-glow: rgba(52, 211, 153, 0.25);
-    --glass-border: rgba(52, 211, 153, 0.15);
-    --glass-border-hover: rgba(52, 211, 153, 0.4);
-    --bg-gradient: radial-gradient(circle at 10% 20%, rgba(52, 211, 153, 0.05) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(5, 150, 105, 0.05) 0%, transparent 40%);
+    --glass-border: rgba(52, 211, 153, 0.12);
+    --glass-border-hover: rgba(52, 211, 153, 0.35);
+    --bg-gradient: radial-gradient(circle at 15% 15%, rgba(52, 211, 153, 0.04) 0%, transparent 45%), radial-gradient(circle at 85% 85%, rgba(5, 150, 105, 0.04) 0%, transparent 45%);
 }
 
 body.theme-amethyst {
     --neon-cyan: #c084fc;
     --neon-blue: #7c3aed;
     --neon-glow: rgba(192, 132, 252, 0.25);
-    --glass-border: rgba(192, 132, 252, 0.15);
-    --glass-border-hover: rgba(192, 132, 252, 0.4);
-    --bg-gradient: radial-gradient(circle at 10% 20%, rgba(192, 132, 252, 0.05) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(124, 58, 237, 0.05) 0%, transparent 40%);
+    --glass-border: rgba(192, 132, 252, 0.12);
+    --glass-border-hover: rgba(192, 132, 252, 0.35);
+    --bg-gradient: radial-gradient(circle at 15% 15%, rgba(192, 132, 252, 0.04) 0%, transparent 45%), radial-gradient(circle at 85% 85%, rgba(124, 58, 237, 0.04) 0%, transparent 45%);
 }
 
 * {
@@ -57,7 +57,7 @@ body {
     align-items: center;
     padding: 60px 20px;
     overflow-x: hidden;
-    perspective: 1200px;
+    perspective: 1600px; /* Глубокая 3D-перспектива для вылетающих окон */
 }
 
 h1 {
@@ -81,15 +81,15 @@ h2 {
     text-align: left;
 }
 
-/* ОПТИМИЗИРОВАННАЯ КАРТОЧКА ОКНА (ВЫЛЕТАЕТ НЕЗАВИСИМО) */
+/* ФУНДАМЕНТАЛЬНОЕ ОКНО С ПОДДЕРЖКОЙ ВЫЛЕТА ИЗ ЦЕНТРА ПОРТАЛА */
 .standalone-container {
     background: var(--bg-glass);
     border: 1px solid var(--glass-border);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
     border-radius: 24px;
     padding: 45px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
     max-width: 480px;
     width: 100%;
     display: flex;
@@ -97,77 +97,84 @@ h2 {
     align-items: center;
     gap: 30px;
     margin-top: 8vh;
-    z-index: 10;
+    z-index: 20; /* Окно всегда парит ПЕРЕД порталом */
     
-    /* Изначально сжата в глубине экрана для эффекта выплевывания */
-    transform: scale(0) rotate(-70deg) translateZ(-400px);
+    /* Начальная точка: зажато глубоко внутри портала, невидимо и уменьшено */
+    transform: scale(0.01) translateZ(-1000px) rotate(45deg);
     opacity: 0;
-    transition: var(--transition-premium), transform 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.15), opacity 1s ease;
+    transition: var(--transition-premium), transform 1.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 1.2s ease;
 }
 
+/* Анимация триггера: выплевывание вперед на пользователя */
 .standalone-container.portal-spawned {
-    transform: scale(1) rotate(0deg) translateZ(0);
+    transform: scale(1) translateZ(0) rotate(0deg);
     opacity: 1;
 }
 
+/* Анимация триггера: засасывание обратно глубоко внутрь центра вихря */
 .standalone-container.portal-sucked {
-    transform: scale(0) rotate(360deg) translateZ(-500px) translateY(-30px);
+    transform: scale(0.01) translateZ(-1200px) rotate(-180deg) translateY(-40px);
     opacity: 0;
-    transition: transform 1.8s cubic-bezier(0.6, -0.28, 0.735, 0.045), opacity 1.2s ease;
+    transition: transform 1.5s cubic-bezier(0.55, 0, 1, 0.45), opacity 1s ease;
 }
 
 .standalone-container:hover {
     border-color: var(--glass-border-hover);
-    box-shadow: 0 30px 60px rgba(0, 242, 254, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    box-shadow: 0 40px 80px rgba(0, 242, 254, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 /* ============================================================================
- * ИЗОЛИРОВАННЫЙ КРУТЯЩИЙСЯ ПОРТАЛ (СТРОГО НА МЕСТЕ ЗА ОКНОМ)
+ * АУТЕНТИЧНЫЙ 3D ПОРТАЛ ИЗ РИК И МОРТИ (ФОРМА КЛЯКСЫ + ЖИДКИЙ ГРАДИЕНТ)
  * ============================================================================
  */
 .morty-portal {
     position: fixed;
-    top: 45%;
+    top: 48%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
-    width: 650px;
-    height: 650px;
-    background: radial-gradient(circle, #00ff88 10%, #00aa55 40%, #023311 60%, transparent 70%);
-    border-radius: 50%;
-    z-index: 1; /* Полностью под карточкой */
+    /* Вертикально вытянутая каноничная форма кляксы Рика */
+    width: 580px;
+    height: 680px;
+    border-radius: 48% 52% 51% 49% / 55% 53% 47% 45%;
+    
+    /* Сложное многослойное органическое свечение портала */
+    background: radial-gradient(circle at 50% 50%, #adff2f 0%, #00ff66 25%, #009933 55%, #013b11 80%, transparent 100%);
+    z-index: 1; /* Строго под карточкой интерфейса */
     pointer-events: none;
     opacity: 0;
-    box-shadow: 0 0 80px rgba(0, 255, 136, 0.5), inset 0 0 60px rgba(0, 170, 85, 0.4);
-    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+    filter: drop-shadow(0 0 70px rgba(0, 255, 102, 0.65));
+    transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.6s ease;
 }
 
+/* Полный разворот портала из измерения */
 .morty-portal.active {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 0.75;
+    transform: translate(-50%, -50%) scale(1.15);
+    opacity: 0.9;
 }
 
+/* Плавный схлопывающийся уход обратно в сингулярность */
 .morty-portal.fade-out {
     transform: translate(-50%, -50%) scale(0);
     opacity: 0;
-    transition: transform 1.2s cubic-bezier(0.6, -0.28, 0.735, 0.045), opacity 0.8s ease;
+    transition: transform 1.4s cubic-bezier(0.6, -0.28, 0.735, 0.045), opacity 0.8s ease;
 }
 
-/* Вращение вихря вынесено на отдельный слой псевдоэлемента, чтобы не крутить саму разметку */
+/* Спиральная жидкая текстура, вращающаяся внутри кляксы */
 .morty-portal::before {
     content: '';
     position: absolute;
     width: 100%;
     height: 100%;
-    background: repeating-conic-gradient(from 0deg, rgba(0,255,136,0.2) 0deg 15deg, transparent 15deg 30deg);
-    border-radius: 50%;
-    animation: vortexSpin 3s linear infinite;
-    filter: blur(3px);
+    border-radius: inherit;
+    background: repeating-conic-gradient(from 0deg, rgba(173, 255, 47, 0.35) 0deg 15deg, transparent 15deg 35deg, rgba(0, 255, 102, 0.25) 35deg 55deg);
+    animation: portalVortexSpin 2.2s linear infinite;
+    filter: blur(4px);
 }
 
-@keyframes vortexSpin {
+@keyframes portalVortexSpin {
     100% { transform: rotate(360deg); }
 }
-/* Вставляй строго под первой частью */
+/* Вставляй эту часть строго под первой частью */
 
 .dashboard-layout {
     display: flex;
@@ -181,8 +188,8 @@ h2 {
     flex: 0 0 280px;
     background: var(--bg-glass);
     border: 1px solid var(--glass-border);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
     border-radius: 24px;
     padding: 30px 20px;
     display: flex;
@@ -237,8 +244,8 @@ h2 {
     flex: 1;
     background: var(--bg-glass);
     border: 1px solid var(--glass-border);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
     border-radius: 24px;
     padding: 40px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
@@ -252,21 +259,10 @@ h2 {
     animation: scaleUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.tab-content.active {
-    display: flex;
-}
+.tab-content.active { display: flex; }
 
-.profile-grid {
-    display: flex;
-    gap: 40px;
-}
-
-.profile-info {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
+.profile-grid { display: flex; gap: 40px; }
+.profile-info { flex: 1; display: flex; flex-direction: column; gap: 16px; }
 
 .stat-card {
     background: var(--bg-inner);
@@ -297,175 +293,41 @@ h2 {
     color: var(--text-white);
 }
 
-.secret-stat {
-    display: inline-block;
-    transition: var(--transition-premium);
-}
+.secret-stat { display: inline-block; transition: var(--transition-premium); }
+.stat-card:hover .secret-stat { color: var(--neon-green); transform: scale(1.15) translateZ(0); text-shadow: 0 0 15px rgba(52, 211, 153, 0.4); }
 
-.stat-card:hover .secret-stat {
-    color: var(--neon-green);
-    transform: scale(1.15) translateZ(0);
-    text-shadow: 0 0 15px rgba(52, 211, 153, 0.4);
-}
+.profile-photo-zone { flex: 0 0 280px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.profile-photo-zone img { width: 100%; max-height: 340px; object-fit: cover; border-radius: 18px; border: 1px solid rgba(255, 255, 255, 0.05); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4); transition: var(--transition-premium); }
+.profile-photo-zone img:hover { transform: scale(1.03); border-color: var(--neon-cyan); box-shadow: 0 20px 40px rgba(0, 242, 254, 0.15); }
 
-.profile-photo-zone {
-    flex: 0 0 280px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-}
+.phone-link { color: var(--neon-cyan); font-size: 15px; font-weight: 600; text-decoration: none; transition: var(--transition-premium); background: rgba(0, 242, 254, 0.05); padding: 10px 20px; border-radius: 30px; border: 1px solid rgba(0, 242, 254, 0.1); }
+.phone-link:hover { background: rgba(0, 242, 254, 0.15); box-shadow: 0 0 15px var(--neon-glow); }
 
-.profile-photo-zone img {
-    width: 100%;
-    max-height: 340px;
-    object-fit: cover;
-    border-radius: 18px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-    transition: var(--transition-premium);
-}
-
-.profile-photo-zone img:hover {
-    transform: scale(1.03);
-    border-color: var(--neon-cyan);
-    box-shadow: 0 20px 40px rgba(0, 242, 254, 0.15);
-}
-
-.phone-link {
-    color: var(--neon-cyan);
-    font-size: 15px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: var(--transition-premium);
-    background: rgba(0, 242, 254, 0.05);
-    padding: 10px 20px;
-    border-radius: 30px;
-    border: 1px solid rgba(0, 242, 254, 0.1);
-}
-
-.phone-link:hover {
-    background: rgba(0, 242, 254, 0.15);
-    box-shadow: 0 0 15px var(--neon-glow);
-}
-
-.comments-archive {
-    max-height: 300px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    padding-right: 8px;
-}
-
+.comments-archive { max-height: 300px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; padding-right: 8px; }
 .comments-archive::-webkit-scrollbar { width: 5px; }
 .comments-archive::-webkit-scrollbar-track { background: transparent; }
 .comments-archive::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
 .comments-archive::-webkit-scrollbar-thumb:hover { background: var(--neon-cyan); }
 
-.db-comment-card {
-    background: var(--bg-inner);
-    border: 1px solid rgba(255, 255, 255, 0.02);
-    border-radius: 14px;
-    padding: 18px;
-    transition: var(--transition-premium);
-}
-
-.db-comment-card:hover {
-    border-color: rgba(0, 242, 254, 0.15);
-}
-
-.db-comment-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 8px;
-    font-size: 12px;
-}
-
+.db-comment-card { background: var(--bg-inner); border: 1px solid rgba(255, 255, 255, 0.02); border-radius: 14px; padding: 18px; transition: var(--transition-premium); }
+.db-comment-card:hover { border-color: rgba(0, 242, 254, 0.15); }
+.db-comment-header { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 12px; }
 .db-comment-author { color: var(--neon-cyan); font-weight: 600; }
 .db-comment-time { color: var(--text-muted); }
 .db-comment-text { font-style: italic; color: #cbd5e1; line-height: 1.5; }
 
-.ajax-form {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    width: 100%;
-}
+.ajax-form { display: flex; flex-direction: column; gap: 14px; width: 100%; }
 
-input[type="number"], input[type="text"] {
-    background-color: var(--bg-inner);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 14px;
-    color: var(--text-white);
-    padding: 16px;
-    font-size: 15px;
-    width: 100%;
-    outline: none;
-    transition: var(--transition-premium);
-}
+input[type="number"], input[type="text"] { background-color: var(--bg-inner); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 14px; color: var(--text-white); padding: 16px; font-size: 15px; width: 100%; outline: none; transition: var(--transition-premium); }
+input:focus { border-color: var(--neon-cyan); box-shadow: 0 0 15px rgba(0, 242, 254, 0.1); background-color: rgba(5, 6, 10, 0.9); }
 
-input:focus {
-    border-color: var(--neon-cyan);
-    box-shadow: 0 0 15px rgba(0, 242, 254, 0.1);
-    background-color: rgba(5, 6, 10, 0.9);
-}
+button.premium-btn { background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-blue) 100%); border: none; border-radius: 14px; color: #06070d; font-weight: 700; font-size: 15px; padding: 16px 32px; cursor: pointer; width: 100%; text-transform: uppercase; letter-spacing: 1px; transition: var(--transition-premium); }
+button.premium-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 30px var(--neon-glow); }
 
-button.premium-btn {
-    background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-blue) 100%);
-    border: none;
-    border-radius: 14px;
-    color: #06070d;
-    font-weight: 700;
-    font-size: 15px;
-    padding: 16px 32px;
-    cursor: pointer;
-    width: 100%;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: var(--transition-premium);
-}
+.stats-banner { background: rgba(0, 242, 254, 0.02); border: 1px dashed rgba(0, 242, 254, 0.2); border-radius: 16px; padding: 18px; text-align: center; font-size: 14px; color: #cbd5e1; line-height: 1.6; }
+.meme-ticker { background: var(--bg-inner); padding: 24px; border-radius: 16px; border-left: 3px solid var(--neon-cyan); font-size: 16px; font-style: italic; color: var(--text-white); box-shadow: inset 5px 0 15px rgba(0, 0, 0, 0.2); }
 
-button.premium-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px var(--neon-glow);
-}
+@keyframes scaleUp { from { opacity: 0; transform: scale(0.98) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
 
-.stats-banner {
-    background: rgba(0, 242, 254, 0.02);
-    border: 1px dashed rgba(0, 242, 254, 0.2);
-    border-radius: 16px;
-    padding: 18px;
-    text-align: center;
-    font-size: 14px;
-    color: #cbd5e1;
-    line-height: 1.6;
-}
-
-.meme-ticker {
-    background: var(--bg-inner);
-    padding: 24px;
-    border-radius: 16px;
-    border-left: 3px solid var(--neon-cyan);
-    font-size: 16px;
-    font-style: italic;
-    color: var(--text-white);
-    box-shadow: inset 5px 0 15px rgba(0, 0, 0, 0.2);
-}
-
-@keyframes scaleUp {
-    from { opacity: 0; transform: scale(0.98) translateY(10px); }
-    to { opacity: 1; transform: scale(1) translateY(0); }
-}
-
-.falling-goat {
-    position: fixed;
-    z-index: 9999;
-    pointer-events: none;
-    animation: fall linear forwards;
-    filter: drop-shadow(0 0 8px rgba(0, 242, 254, 0.3));
-}
-
-@keyframes fall {
-    to { transform: translateY(calc(100vh + 100px)) rotate(360deg); }
-}
+.falling-goat { position: fixed; z-index: 9999; pointer-events: none; animation: fall linear forwards; filter: drop-shadow(0 0 8px rgba(0, 242, 254, 0.3)); }
+@keyframes fall { to { transform: translateY(calc(100vh + 100px)) rotate(360deg); } }
