@@ -1,10 +1,9 @@
 /**
  * ============================================================================
- * ARSENIY SYSTEMS v2.0 - GLASSMORPHISM PREMIUM INTERFACE WITH PORTAL EFFECTS
+ * ARSENIY SYSTEMS v2.0 - PREMIUM INTERFACE + ADVANCED PORTAL PHYSICS
  * ============================================================================
  */
 
-/* Дефолтная тема: Cyan Drive */
 :root, body.theme-cyan {
     --bg-base: #06070d;
     --bg-glass: rgba(18, 22, 39, 0.55);
@@ -22,7 +21,6 @@
     --bg-gradient: radial-gradient(circle at 10% 20%, rgba(0, 242, 254, 0.05) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(79, 172, 254, 0.05) 0%, transparent 40%);
 }
 
-/* Тема 2: Toxic Mint */
 body.theme-emerald {
     --neon-cyan: #34d399;
     --neon-blue: #059669;
@@ -32,7 +30,6 @@ body.theme-emerald {
     --bg-gradient: radial-gradient(circle at 10% 20%, rgba(52, 211, 153, 0.05) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(5, 150, 105, 0.05) 0%, transparent 40%);
 }
 
-/* Тема 3: Aura Amethyst */
 body.theme-amethyst {
     --neon-cyan: #c084fc;
     --neon-blue: #7c3aed;
@@ -60,6 +57,7 @@ body {
     align-items: center;
     padding: 60px 20px;
     overflow-x: hidden;
+    perspective: 1000px;
 }
 
 h1 {
@@ -98,12 +96,21 @@ h2 {
     align-items: center;
     gap: 30px;
     margin-top: 8vh;
-    transition: var(--transition-premium), transform 1.2s cubic-bezier(0.6, -0.28, 0.735, 0.045), opacity 1s ease;
+    z-index: 10;
+    transform: scale(0) rotate(-180deg) translateZ(-500px);
+    opacity: 0;
+    transition: var(--transition-premium), transform 2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 1.5s ease;
+}
+
+.standalone-container.portal-spawned {
+    transform: scale(1) rotate(0deg) translateZ(0);
+    opacity: 1;
 }
 
 .standalone-container.portal-sucked {
-    transform: scale(0) rotate(720deg) translateY(-100px);
+    transform: scale(0) rotate(540deg) translateZ(-800px) translateY(-50px);
     opacity: 0;
+    transition: transform 2.2s cubic-bezier(0.76, 0, 0.24, 1), opacity 1.5s ease;
 }
 
 .standalone-container:hover {
@@ -111,50 +118,49 @@ h2 {
     box-shadow: 0 30px 60px rgba(0, 242, 254, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
-/* ============================================================================
- * КОМПОНЕНТ КИБЕР-ПОРТАЛА РИКА И МОРТИ
- * ============================================================================
- */
 .morty-portal {
     position: fixed;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, #00ff88 20%, #00aa55 50%, transparent 70%);
+    width: 650px;
+    height: 650px;
+    background: radial-gradient(circle, #00ff88 15%, #00aa55 45%, #023311 65%, transparent 75%);
     border-radius: 50%;
-    z-index: 1000;
+    z-index: 1;
     pointer-events: none;
     opacity: 0;
-    box-shadow: 0 0 80px #00ff88, inset 0 0 60px #00aa55;
-    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s ease;
+    box-shadow: 0 0 100px rgba(0, 255, 136, 0.6), inset 0 0 80px rgba(0, 170, 85, 0.5);
+    transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.8s ease;
 }
 
 .morty-portal.active {
     transform: translate(-50%, -50%) scale(1.1);
-    opacity: 0.85;
-    animation: portalRotate 4s linear infinite;
+    opacity: 0.75;
+    animation: portalRotate 6s linear infinite;
 }
 
-/* Вихри внутри портала */
+.morty-portal.fade-out {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    transition: transform 1.5s cubic-bezier(0.36, 0, 0.66, -0.56), opacity 1s ease;
+}
+
 .morty-portal::before {
     content: '';
     position: absolute;
     width: 100%;
     height: 100%;
-    background: repeating-conic-gradient(from 0deg, rgba(0,255,100,0.1) 0deg 30deg, transparent 30deg 60deg);
+    background: repeating-conic-gradient(from 0deg, rgba(0,255,136,0.15) 0deg 20deg, transparent 20deg 40deg);
     border-radius: 50%;
-    animation: portalVortex 1.5s linear infinite;
+    animation: portalVortex 2s linear infinite;
+    filter: blur(2px);
 }
 
-@keyframes portalRotate { 100% { transform: translate(-50%, -50%) rotate(360deg) scale(1); } }
+@keyframes portalRotate { 100% { transform: translate(-50%, -50%) rotate(360deg) scale(1.1); } }
 @keyframes portalVortex { 100% { transform: rotate(-360deg); } }
+/* Вставляй это строго под первой частью */
 
-/* ============================================================================
- * ОСТАЛЬНАЯ СЕТКА ИНТЕРФЕЙСА
- * ============================================================================
- */
 .dashboard-layout {
     display: flex;
     gap: 30px;
@@ -231,11 +237,28 @@ h2 {
     min-height: 560px;
 }
 
-.tab-content { display: none; flex-direction: column; gap: 30px; animation: scaleUp 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-.tab-content.active { display: flex; }
+.tab-content {
+    display: none;
+    flex-direction: column;
+    gap: 30px;
+    animation: scaleUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
-.profile-grid { display: flex; gap: 40px; }
-.profile-info { flex: 1; display: flex; flex-direction: column; gap: 16px; }
+.tab-content.active {
+    display: flex;
+}
+
+.profile-grid {
+    display: flex;
+    gap: 40px;
+}
+
+.profile-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
 
 .stat-card {
     background: var(--bg-inner);
@@ -270,13 +293,21 @@ h2 {
     display: inline-block;
     transition: var(--transition-premium);
 }
+
 .stat-card:hover .secret-stat {
     color: var(--neon-green);
     transform: scale(1.15) translateZ(0);
     text-shadow: 0 0 15px rgba(52, 211, 153, 0.4);
 }
 
-.profile-photo-zone { flex: 0 0 280px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.profile-photo-zone {
+    flex: 0 0 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
 .profile-photo-zone img {
     width: 100%;
     max-height: 340px;
@@ -286,6 +317,7 @@ h2 {
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
     transition: var(--transition-premium);
 }
+
 .profile-photo-zone img:hover {
     transform: scale(1.03);
     border-color: var(--neon-cyan);
@@ -303,6 +335,7 @@ h2 {
     border-radius: 30px;
     border: 1px solid rgba(0, 242, 254, 0.1);
 }
+
 .phone-link:hover {
     background: rgba(0, 242, 254, 0.15);
     box-shadow: 0 0 15px var(--neon-glow);
@@ -329,77 +362,102 @@ h2 {
     padding: 18px;
     transition: var(--transition-premium);
 }
-.db-comment-card:hover { border-color: rgba(0, 242, 254, 0.15); }
-.db-comment-header { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 12px; }
+
+.db-comment-card:hover {
+    border-color: rgba(0, 242, 254, 0.15);
+}
+
+.db-comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 12px;
+}
+
 .db-comment-author { color: var(--neon-cyan); font-weight: 600; }
 .db-comment-time { color: var(--text-muted); }
 .db-comment-text { font-style: italic; color: #cbd5e1; line-height: 1.5; }
-.ajax-form { display: flex; flex-direction: column; gap: 14px; width: 100%; }
+
+.ajax-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+}
+
 input[type="number"], input[type="text"] {
-background-color: var(--bg-inner);
-border: 1px solid rgba(255, 255, 255, 0.08);
-border-radius: 14px;
-color: var(--text-white);
-padding: 16px;
-font-size: 15px;
-width: 100%;
-outline: none;
-transition: var(--transition-premium);
+    background-color: var(--bg-inner);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    color: var(--text-white);
+    padding: 16px;
+    font-size: 15px;
+    width: 100%;
+    outline: none;
+    transition: var(--transition-premium);
 }
+
 input:focus {
-border-color: var(--neon-cyan);
-box-shadow: 0 0 15px rgba(0, 242, 254, 0.1);
-background-color: rgba(5, 6, 10, 0.9);
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.1);
+    background-color: rgba(5, 6, 10, 0.9);
 }
+
 button.premium-btn {
-background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-blue) 100%);
-border: none;
-border-radius: 14px;
-color: #06070d;
-font-weight: 700;
-font-size: 15px;
-padding: 16px 32px;
-cursor: pointer;
-width: 100%;
-text-transform: uppercase;
-letter-spacing: 1px;
-transition: var(--transition-premium);
+    background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-blue) 100%);
+    border: none;
+    border-radius: 14px;
+    color: #06070d;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 16px 32px;
+    cursor: pointer;
+    width: 100%;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: var(--transition-premium);
 }
+
 button.premium-btn:hover {
-transform: translateY(-2px);
-box-shadow: 0 12px 30px var(--neon-glow);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px var(--neon-glow);
 }
+
 .stats-banner {
-background: rgba(0, 242, 254, 0.02);
-border: 1px dashed rgba(0, 242, 254, 0.2);
-border-radius: 16px;
-padding: 18px;
-text-align: center;
-font-size: 14px;
-color: #cbd5e1;
-line-height: 1.6;
+    background: rgba(0, 242, 254, 0.02);
+    border: 1px dashed rgba(0, 242, 254, 0.2);
+    border-radius: 16px;
+    padding: 18px;
+    text-align: center;
+    font-size: 14px;
+    color: #cbd5e1;
+    line-height: 1.6;
 }
+
 .meme-ticker {
-background: var(--bg-inner);
-padding: 24px;
-border-radius: 16px;
-border-left: 3px solid var(--neon-cyan);
-font-size: 16px;
-font-style: italic;
-color: var(--text-white);
-box-shadow: inset 5px 0 15px rgba(0, 0, 0, 0.2);
+    background: var(--bg-inner);
+    padding: 24px;
+    border-radius: 16px;
+    border-left: 3px solid var(--neon-cyan);
+    font-size: 16px;
+    font-style: italic;
+    color: var(--text-white);
+    box-shadow: inset 5px 0 15px rgba(0, 0, 0, 0.2);
 }
+
 @keyframes scaleUp {
-from { opacity: 0; transform: scale(0.98) translateY(10px); }
-to { opacity: 1; transform: scale(1) translateY(0); }
+    from { opacity: 0; transform: scale(0.98) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
 }
+
 .falling-goat {
-position: fixed;
-z-index: 9999;
-pointer-events: none;
-animation: fall linear forwards;
-filter: drop-shadow(0 0 8px rgba(0, 242, 254, 0.3));
+    position: fixed;
+    z-index: 9999;
+    pointer-events: none;
+    animation: fall linear forwards;
+    filter: drop-shadow(0 0 8px rgba(0, 242, 254, 0.3));
 }
+
 @keyframes fall {
-to { transform: translateY(calc(100vh + 100px)) rotate(360deg); }
+    to { transform: translateY(calc(100vh + 100px)) rotate(360deg); }
 }
