@@ -47,14 +47,27 @@ function requireAgeVerification(req, res, next) {
     res.redirect('/');
 }
 
+// ГЛАВНАЯ СТРАНИЦА: Фейс-контроль
 app.get('/', (req, res) => {
     if (req.session && req.session.isVerified) return res.redirect('/dashboard');
     res.sendFile(path.join(__dirname, 'templates', 'age_check.html'));
 });
 
+// ЕДИНЫЙ ОБРАБОТЧИК: Проверяет и возраст, и кодовые слова
 app.post('/check-age', (req, res) => {
-    const age = parseInt(req.body.user_age);
-    if (isNaN(age)) return res.status(400).send("Вы ввели какую-то дичь.");
+    const inputVal = req.body.user_age ? req.body.user_age.trim() : "";
+
+    // 1. ПРОВЕРКА НА ПАСХАЛКУ "КИМОНО"
+    if (inputVal === "кимоно") {
+        return res.sendFile(path.join(__dirname, 'templates', 'kimono.html'));
+    }
+
+    // 2. СТАНДАРТНАЯ ПРОВЕРКА ВОЗРАСТА (Никуда не уходит, работает как раньше)
+    const age = parseInt(inputVal);
+
+    if (isNaN(age)) {
+        return res.status(400).send("Вы ввели некорректные данные. Введите возраст или чит-код.");
+    }
 
     if (age > 100) {
         database.statistics.babkaTriggered++;
@@ -129,8 +142,19 @@ app.get('/api/random-fact', (req, res) => {
     res.json({ fact: database.memes[Math.floor(Math.random() * database.memes.length)] });
 });
 
+// Роут для выдачи основного фото (теперь из папки static/img/)
 app.get('/get-photo', (req, res) => {
-    res.sendFile(path.join(__dirname, 'photo.jpg'));
+    res.sendFile(path.join(__dirname, 'static', 'img', 'photo.jpg'));
+});
+
+// Роут для выдачи секретного фото кимоно (теперь из папки static/img/)
+app.get('/get-photo2', (req, res) => {
+    const photo2Path = path.join(__dirname, 'static', 'img', 'photo2.jpg');
+    if (fs.existsSync(photo2Path)) {
+        res.sendFile(photo2Path);
+    } else {
+        res.status(404).send("Файл photo2.jpg отсутствует в папке static/img/");
+    }
 });
 
 app.listen(PORT, '0.0.0.0', () => console.log(`Сервер на http://localhost:${PORT}`));
