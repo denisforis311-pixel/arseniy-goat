@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // 1. Инициализация сохраненной темы
     const savedTheme = localStorage.getItem('arseniy-app-theme') || 'theme-cyan';
     document.body.classList.add(savedTheme);
 
@@ -8,11 +9,34 @@ document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("portal-form");
     const portal = document.getElementById("portal-element");
 
+    // ========================================================================
+    // КИНЕМАТОГРАФИЧНОЕ ВЫПЛЕВЫВАНИЕ ОКНА ИЗ ПОРТАЛА ПРИ ЗАГРУЗКЕ
+    // ========================================================================
+    if (portal && box) {
+        // Сразу открываем портал на полную катушку
+        portal.classList.add("active");
+        
+        // Через 200мс выплевываем карточку вперед
+        setTimeout(() => {
+            box.classList.add("portal-spawned");
+        }, 200);
+
+        // Через 1.5 секунды, когда карточка встала на место, плавно тушим портал
+        setTimeout(() => {
+            portal.classList.add("fade-out");
+        }, 1500);
+
+        // Полностью удаляем технические классы активности портала, чтобы не мешали
+        setTimeout(() => {
+            portal.classList.remove("active", "fade-out");
+        }, 2700);
+    }
+
+    // Обработка интерактивного изменения рамок на ходу
     if (input && box && title) {
         input.addEventListener("input", () => {
             const val = parseInt(input.value);
-            box.style.borderColor = "var(--neon-cyan)";
-            box.style.transform = "none";
+            box.style.borderColor = "var(--glass-border)";
             box.style.filter = "none";
             title.innerText = "Подтвердите свой возраст";
             title.style.color = "var(--text-white)";
@@ -22,7 +46,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 box.style.borderColor = "#ef4444";
                 title.innerText = "Ты уверено? 🤨";
                 title.style.color = "#ef4444";
-                box.style.transform = "scale(1.02) rotate(1deg)";
             } else if (val > 100) {
                 box.style.borderColor = "#94a3b8";
                 title.innerText = "Древний инвестор... 👵";
@@ -35,42 +58,50 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Перехват отправки формы для запуска портала Рика и Морти
+    // ========================================================================
+    // ЭФФЕКТ ЗАСАСЫВАНИЯ В ПОРТАЛ ПРИ ОТПРАВКЕ ВОЗРАСТА
+    // ========================================================================
     if (form && portal && box) {
         form.addEventListener("submit", (e) => {
-            e.preventDefault(); // Тормозим моментальный переход
+            e.preventDefault(); // Стопим резкий переход браузера
 
-            // Активируем крутящийся портал
+            // Убираем класс спавна, включаем чистый портал за карточкой
+            box.classList.remove("portal-spawned");
+            portal.classList.remove("fade-out");
             portal.classList.add("active");
 
-            // Запускаем эффект засасывания карточки через 300мс
+            // Карточка начинает закручиваться и засасываться вглубь экрана
             setTimeout(() => {
                 box.classList.add("portal-sucked");
-            }, 300);
+            }, 100);
 
-            // Отправляем форму на сервер строго через 1.5 секунды, когда карточка полностью сожмется в портале
+            // Отправляем данные на сервер ровно через 2.2 секунды киноэффекта
             setTimeout(() => {
                 form.submit();
-            }, 1500);
+            }, 2200);
         });
     }
 });
 
 /**
- * Функция для плавного ухода в портал со страниц заглушек по кнопке Назад
+ * Функция ухода в портал для кнопок "Назад" на страницах банов/секреток
  */
 window.triggerPortalRedirect = function(url) {
     const portal = document.getElementById("portal-element");
     const box = document.getElementById("age-box");
     
     if (portal && box) {
+        box.classList.remove("portal-spawned");
+        portal.classList.remove("fade-out");
         portal.classList.add("active");
+        
         setTimeout(() => {
             box.classList.add("portal-sucked");
-        }, 300);
+        }, 100);
+        
         setTimeout(() => {
             window.location.href = url;
-        }, 1500);
+        }, 2200);
     } else {
         window.location.href = url;
     }
