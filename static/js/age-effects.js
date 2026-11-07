@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. Инициализация сохраненной темы
     const savedTheme = localStorage.getItem('arseniy-app-theme') || 'theme-cyan';
     document.body.classList.add(savedTheme);
 
@@ -10,29 +9,28 @@ document.addEventListener("DOMContentLoaded", () => {
     const portal = document.getElementById("portal-element");
 
     // ========================================================================
-    // КИНЕМАТОГРАФИЧНОЕ ВЫПЛЕВЫВАНИЕ ОКНА ИЗ ПОРТАЛА ПРИ ЗАГРУЗКЕ
+    // НАСТОЯЩЕЕ ВЫПЛЕВЫВАНИЕ ОКНА ПРИ ЗАГРУЗКЕ
     // ========================================================================
     if (portal && box) {
-        // Сразу открываем портал на полную катушку
+        // Зажигаем портал на месте
         portal.classList.add("active");
         
-        // Через 200мс выплевываем карточку вперед
+        // Окно вылетает из портала вперед независимо
         setTimeout(() => {
             box.classList.add("portal-spawned");
-        }, 200);
+        }, 150);
 
-        // Через 1.5 секунды, когда карточка встала на место, плавно тушим портал
+        // Через 1.3 секунды плавно тушим портал, оставляя окно
         setTimeout(() => {
             portal.classList.add("fade-out");
-        }, 1500);
+        }, 1300);
 
-        // Полностью удаляем технические классы активности портала, чтобы не мешали
+        // Полная очистка классов
         setTimeout(() => {
             portal.classList.remove("active", "fade-out");
-        }, 2700);
+        }, 2500);
     }
 
-    // Обработка интерактивного изменения рамок на ходу
     if (input && box && title) {
         input.addEventListener("input", () => {
             const val = parseInt(input.value);
@@ -59,49 +57,46 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ========================================================================
-    // ЭФФЕКТ ЗАСАСЫВАНИЯ В ПОРТАЛ ПРИ ОТПРАВКЕ ВОЗРАСТА
+    // ЭФФЕКТ ЧИСТОГО ЗАСАСЫВАНИЯ ОКНА ПРИ ОТПРАВКЕ
     // ========================================================================
     if (form && portal && box) {
         form.addEventListener("submit", (e) => {
-            e.preventDefault(); // Стопим резкий переход браузера
+            e.preventDefault();
 
-            // Убираем класс спавна, включаем чистый портал за карточкой
-            box.classList.remove("portal-spawned");
+            // Включаем стабильный портал строго за карточкой
             portal.classList.remove("fade-out");
             portal.classList.add("active");
 
-            // Карточка начинает закручиваться и засасываться вглубь экрана
+            // Окно закручивается и улетает вглубь портала
             setTimeout(() => {
+                box.classList.remove("portal-spawned");
                 box.classList.add("portal-sucked");
-            }, 100);
+            }, 50);
 
-            // Отправляем данные на сервер ровно через 2.2 секунды киноэффекта
+            // Редирект/отправка строго после окончания анимации засасывания
             setTimeout(() => {
                 form.submit();
-            }, 2200);
+            }, 1800);
         });
     }
 });
 
-/**
- * Функция ухода в портал для кнопок "Назад" на страницах банов/секреток
- */
 window.triggerPortalRedirect = function(url) {
     const portal = document.getElementById("portal-element");
     const box = document.getElementById("age-box");
     
     if (portal && box) {
-        box.classList.remove("portal-spawned");
         portal.classList.remove("fade-out");
         portal.classList.add("active");
         
         setTimeout(() => {
+            box.classList.remove("portal-spawned");
             box.classList.add("portal-sucked");
-        }, 100);
+        }, 50);
         
         setTimeout(() => {
             window.location.href = url;
-        }, 2200);
+        }, 1800);
     } else {
         window.location.href = url;
     }
