@@ -1,36 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // Автоматическая подгрузка сохраненной темы
     const savedTheme = localStorage.getItem('arseniy-app-theme') || 'theme-cyan';
     document.body.classList.add(savedTheme);
 
     const input = document.getElementById("age-input");
     const box = document.getElementById("age-box");
     const title = document.getElementById("age-title");
-    const form = document.getElementById("portal-form");
-    const portal = document.getElementById("portal-element");
 
-    // ========================================================================
-    // КАН ОНИЧНЫЙ ВЫЛЕТ ОКНА ПОВЕРХ ВРАЩАЮЩЕЙСЯ ПЛАЗМЫ
-    // ========================================================================
-    if (portal && box) {
-        // Разворачиваем реальный HD-рендеринг портала на фоне
-        portal.classList.add("active");
-        
-        // Окно вылетает из глубины вихря строго ПОВЕРХ картинки вперед на юзера
-        setTimeout(() => {
-            box.classList.add("portal-spawned");
-        }, 150);
-
-        // Через 1.5 секунды, когда окно встало, плавно растворяем портал на фоне
-        setTimeout(() => {
-            portal.classList.add("fade-out");
-        }, 1500);
-
-        // Полное удаление анимационных классов
-        setTimeout(() => {
-            portal.classList.remove("active", "fade-out");
-        }, 2700);
-    }
-
+    // Интерактивная реакция рамок на вводимые рофло-числа
     if (input && box && title) {
         input.addEventListener("input", () => {
             const val = parseInt(input.value);
@@ -55,59 +32,27 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
-
-    // ========================================================================
-    // ЭФФЕКТ ЗАСАСЫВАНИЯ: ОКНО ВСПЯТЬ СКРУЧИВАЕТСЯ В ЦЕНТР ТЕКСТУРЫ
-    // ========================================================================
-    if (form && portal && box) {
-        form.addEventListener("submit", (e) => {
-            e.preventDefault();
-
-            // Врубаем HD-вихрь на фоне под окном
-            portal.classList.remove("fade-out");
-            portal.classList.add("active");
-
-            // Окно скручивается по спирали и улетает прямо в глубину плазмы
-            setTimeout(() => {
-                box.classList.remove("portal-spawned");
-                box.classList.add("portal-sucked");
-            }, 50);
-
-            // Редирект после полного исчезновения объекта внутри вихря
-            setTimeout(() => {
-                form.submit();
-            }, 1500);
-        });
-    }
 });
 
+/**
+ * Прямой мгновенный переход для кнопок "Назад"
+ */
 window.triggerPortalRedirect = function(url) {
-    const portal = document.getElementById("portal-element");
-    const box = document.getElementById("age-box");
-    
-    if (portal && box) {
-        portal.classList.remove("fade-out");
-        portal.classList.add("active");
-        
-        setTimeout(() => {
-            box.classList.remove("portal-spawned");
-            box.classList.add("portal-sucked");
-        }, 50);
-        
-        setTimeout(() => {
-            window.location.href = url;
-        }, 1500);
-    } else {
-        window.location.href = url;
-    }
+    window.location.href = url;
 }
 
+/**
+ * Глобальная функция переключения темы
+ */
 window.setTheme = function(themeName) {
     document.body.classList.remove('theme-cyan', 'theme-emerald', 'theme-amethyst');
     document.body.classList.add(themeName);
     localStorage.setItem('arseniy-app-theme', themeName);
 }
 
+/**
+ * Переключатель темы по кругу для минималистичной кнопки
+ */
 window.toggleNextTheme = function() {
     const themes = ['theme-cyan', 'theme-emerald', 'theme-amethyst'];
     let currentTheme = localStorage.getItem('arseniy-app-theme') || 'theme-cyan';
