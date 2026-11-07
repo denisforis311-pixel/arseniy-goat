@@ -7,12 +7,9 @@
     <link rel="stylesheet" href="/static/css/global.css">
 </head>
 <body>
-    <!-- Невидимый до активации портал Рика -->
-    <div class="morty-portal" id="portal-element"></div>
-
     <div class="standalone-container" id="age-box">
         <h2 id="age-title">Подтвердите свой возраст</h2>
-        <form action="/check-age" method="POST" class="ajax-form" id="portal-form">
+        <form action="/check-age" method="POST" class="ajax-form">
             <input type="number" name="user_age" id="age-input" placeholder="Введите ваш возраст" required min="1" max="150">
             <button type="submit" class="premium-btn">Получить доступ</button>
         </form>
