@@ -7,14 +7,16 @@
     <link rel="stylesheet" href="/static/css/global.css">
 </head>
 <body>
+    <!-- Невидимый до активации портал Рика -->
+    <div class="morty-portal" id="portal-element"></div>
+
     <div class="standalone-container" id="age-box">
         <h2 id="age-title">Подтвердите свой возраст</h2>
-        <form action="/check-age" method="POST" class="ajax-form">
+        <form action="/check-age" method="POST" class="ajax-form" id="portal-form">
             <input type="number" name="user_age" id="age-input" placeholder="Введите ваш возраст" required min="1" max="150">
             <button type="submit" class="premium-btn">Получить доступ</button>
         </form>
 
-        <!-- Минималистичная кнопка циклической смены темы -->
         <div onclick="toggleNextTheme()" style="color: var(--text-muted); font-size: 12px; cursor: pointer; padding: 5px 10px; border-radius: 20px; transition: var(--transition-premium); margin-top: 5px; border: 1px solid rgba(255,255,255,0.02); background: rgba(0,0,0,0.1);" onmouseover="this.style.color='var(--neon-cyan)', this.style.borderColor='rgba(0,242,254,0.1)'" onmouseout="this.style.color='var(--text-muted)', this.style.borderColor='rgba(255,255,255,0.02)'">
             🎨 Сменить интерфейс
         </div>
