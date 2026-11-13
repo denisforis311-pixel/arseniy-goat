@@ -27,7 +27,6 @@
                         <div class="stat-card"><div class="stat-label">Масса брутто</div><div class="stat-value">не известен</div></div>
                     </div>
                     <div class="profile-photo-zone">
-                        <!-- 🔥 Заменили роут /get-photo на прямой статический путь -->
                         <img src="/static/img/photo.jpg" id="boss-photo">
                         <a href="tel:+375336479461" class="phone-link">📞 +375 (33) 647-94-61</a>
                     </div>
@@ -59,27 +58,27 @@
                 <div class="stats-banner">
                     Выберите визуальный интерфейс для отображения параметров Арсения. Настройки сохраняются локально.
                 </div>
-                <div class="profile-info" style="gap: 15px; width: 100%;">
-                    <div class="stat-card" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;" onclick="setTheme('theme-cyan')">
+                <div class="profile-info" style="gap: 14px; width: 100%;">
+                    <div class="theme-option-card" data-theme="theme-cyan" onclick="setTheme('theme-cyan')">
                         <div>
-                            <div class="stat-value" style="color: #00f2fe;">Cyan Drive</div>
-                            <div class="stat-label" style="margin-top: 5px;">Стандартный премиальный бирюзовый неон</div>
+                            <div class="stat-value" style="color: #38bdf8;">Titanium Frost</div>
+                            <div class="stat-label" style="margin-top: 6px; margin-bottom: 0;">Холодный хром и ледяной акцент</div>
                         </div>
-                        <div style="width: 20px; height: 20px; border-radius: 50%; background: #00f2fe; box-shadow: 0 0 10px #00f2fe;"></div>
+                        <div class="theme-dot" style="background: #38bdf8; color: #38bdf8; box-shadow: 0 0 14px #38bdf8;"></div>
                     </div>
-                    <div class="stat-card" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;" onclick="setTheme('theme-emerald')">
+                    <div class="theme-option-card" data-theme="theme-emerald" onclick="setTheme('theme-emerald')">
                         <div>
-                            <div class="stat-value" style="color: #34d399;">Toxic Mint</div>
-                            <div class="stat-label" style="margin-top: 5px;">Кислотно-зеленый цифровой изумруд</div>
+                            <div class="stat-value" style="color: #10b981;">Carbon Emerald</div>
+                            <div class="stat-label" style="margin-top: 6px; margin-bottom: 0;">Глубокий карбон и изумрудный металлик</div>
                         </div>
-                        <div style="width: 20px; height: 20px; border-radius: 50%; background: #34d399; box-shadow: 0 0 10px #34d399;"></div>
+                        <div class="theme-dot" style="background: #10b981; color: #10b981; box-shadow: 0 0 14px #10b981;"></div>
                     </div>
-                    <div class="stat-card" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;" onclick="setTheme('theme-amethyst')">
+                    <div class="theme-option-card" data-theme="theme-amethyst" onclick="setTheme('theme-amethyst')">
                         <div>
-                            <div class="stat-value" style="color: #c084fc;">Aura Amethyst</div>
-                            <div class="stat-label" style="margin-top: 5px;">Люксовый пурпурно-аметистовый sunset</div>
+                            <div class="stat-value" style="color: #c084fc;">Royal Obsidian</div>
+                            <div class="stat-label" style="margin-top: 6px; margin-bottom: 0;">Чёрный обсидиан и королевский аметист</div>
                         </div>
-                        <div style="width: 20px; height: 20px; border-radius: 50%; background: #c084fc; box-shadow: 0 0 10px #c084fc;"></div>
+                        <div class="theme-dot" style="background: #a855f7; color: #a855f7; box-shadow: 0 0 14px #a855f7;"></div>
                     </div>
                 </div>
             </section>
