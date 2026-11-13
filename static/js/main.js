@@ -1,3 +1,4 @@
+```javascript
 document.addEventListener("DOMContentLoaded", () => {
     injectRampageStyles();
     init3DTiltCards();
@@ -8,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* ============================================================================
- * 3D PARALLAX TILT + СТУДИЙНЫЙ БЛИК НА ФОТО
+ * 3D PARALLAX TILT + СТУДИЙНЫЙ БЛИК НА ФОТО (БЕЗ БАГА СЛОЕВ)
  * ============================================================================ */
 function init3DTiltCards() {
     const targets = document.querySelectorAll("#boss-photo, #secret-photo");
@@ -32,25 +33,21 @@ function init3DTiltCards() {
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
 
-            const rotateX = ((y - centerY) / centerY) * -11;
-            const rotateY = ((x - centerX) / centerX) * 11;
+            const rotateX = ((y - centerY) / centerY) * -10;
+            const rotateY = ((x - centerX) / centerX) * 10;
 
             const glareX = (x / rect.width) * 100;
             const glareY = (y / rect.height) * 100;
 
             wrapper.style.transition = "transform 0.08s ease-out";
-            wrapper.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`;
+            wrapper.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
             glare.style.setProperty("--glare-x", `${glareX}%`);
             glare.style.setProperty("--glare-y", `${glareY}%`);
         });
 
         wrapper.addEventListener("mouseleave", () => {
-            wrapper.style.transition = "transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)";
-            wrapper.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
-        });
-
-        wrapper.addEventListener("mousedown", () => {
-            wrapper.style.transform += " scale3d(0.97, 0.97, 0.97)";
+            wrapper.style.transition = "transform 0.5s cubic-bezier(0.22, 1, 0.36, 1)";
+            wrapper.style.transform = "perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)";
         });
     });
 }
@@ -67,7 +64,7 @@ function injectRampageStyles() {
             position: fixed;
             top: 50%;
             left: 50%;
-            width: min(88vw, 950px);
+            width: min(85vw, 900px);
             height: auto;
             pointer-events: none;
             z-index: 10000;
@@ -80,18 +77,18 @@ function injectRampageStyles() {
             inset: 0;
             pointer-events: none;
             z-index: 9999;
-            background: radial-gradient(circle, transparent 40%, rgba(220, 38, 38, 0.35) 100%);
+            background: radial-gradient(circle, transparent 40%, rgba(220, 38, 38, 0.32) 100%);
             animation: dotaBloodPulse 1.2s ease-out forwards;
         }
 
         @keyframes dotaRampageDiagonal {
             0% {
                 opacity: 0;
-                transform: translate(-130%, 35%) rotate(-14deg) scale(2.4);
+                transform: translate(-130%, 35%) rotate(-14deg) scale(2.3);
             }
             12% {
                 opacity: 1;
-                transform: translate(-50%, -50%) rotate(-14deg) scale(1.06);
+                transform: translate(-50%, -50%) rotate(-14deg) scale(1.05);
             }
             18% {
                 transform: translate(-50%, -50%) rotate(-14deg) scale(0.98);
@@ -101,11 +98,11 @@ function injectRampageStyles() {
             }
             75% {
                 opacity: 1;
-                transform: translate(-50%, -50%) rotate(-14deg) scale(1.05);
+                transform: translate(-50%, -50%) rotate(-14deg) scale(1.04);
             }
             100% {
                 opacity: 0;
-                transform: translate(35%, -135%) rotate(-14deg) scale(1.3);
+                transform: translate(35%, -135%) rotate(-14deg) scale(1.25);
             }
         }
 
@@ -190,13 +187,11 @@ function initCommentSystem() {
 }
 
 function initInteractiveMatrix() {
-    // Делегируем клик на всю зону с фоткой босса, чтобы он срабатывал всегда
-    const photoZone = document.querySelector(".profile-photo-zone");
-    const photo = document.getElementById("boss-photo");
+    const photoWrapper = document.querySelector(".profile-photo-zone .tilt-photo-wrapper") || document.getElementById("boss-photo");
 
-    if (photoZone && photo) {
-        photoZone.addEventListener("click", (e) => {
-            if (e.target.closest(".phone-link")) return;
+    if (photoWrapper) {
+        photoWrapper.addEventListener("click", (e) => {
+            e.stopPropagation();
             triggerDotaRampage();
             playBossSound();
         });
