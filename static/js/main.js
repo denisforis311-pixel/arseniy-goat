@@ -8,9 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
     loadSavedTheme();
 });
 
-/* ============================================================================
- * 3D PARALLAX TILT + СТУДИЙНЫЙ БЛИК НА ФОТО (БЕЗ БАГА СЛОЕВ)
- * ============================================================================ */
 function init3DTiltCards() {
     const targets = document.querySelectorAll("#boss-photo, #secret-photo");
     targets.forEach(img => {
@@ -29,20 +26,16 @@ function init3DTiltCards() {
             const rect = wrapper.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
 
-            const rotateX = ((y - centerY) / centerY) * -10;
-            const rotateY = ((x - centerX) / centerX) * 10;
-
-            const glareX = (x / rect.width) * 100;
-            const glareY = (y / rect.height) * 100;
+            const rotateX = ((y - centerY) / centerY) * -9;
+            const rotateY = ((x - centerX) / centerX) * 9;
 
             wrapper.style.transition = "transform 0.08s ease-out";
             wrapper.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
-            glare.style.setProperty("--glare-x", `${glareX}%`);
-            glare.style.setProperty("--glare-y", `${glareY}%`);
+            glare.style.setProperty("--glare-x", `${(x / rect.width) * 100}%`);
+            glare.style.setProperty("--glare-y", `${(y / rect.height) * 100}%`);
         });
 
         wrapper.addEventListener("mouseleave", () => {
@@ -52,9 +45,6 @@ function init3DTiltCards() {
     });
 }
 
-/* ============================================================================
- * DOTA 2 RAMPAGE ДИАГОНАЛЬНЫЙ БАННЕР + ЗВУК
- * ============================================================================ */
 function injectRampageStyles() {
     if (document.getElementById("dota-rampage-styles")) return;
     const style = document.createElement("style");
@@ -64,12 +54,11 @@ function injectRampageStyles() {
             position: fixed;
             top: 50%;
             left: 50%;
-            width: min(85vw, 900px);
+            width: min(82vw, 760px);
             height: auto;
             pointer-events: none;
             z-index: 10000;
-            filter: drop-shadow(0 0 25px rgba(239, 68, 68, 0.95)) drop-shadow(0 0 60px rgba(185, 28, 28, 0.8));
-            animation: dotaRampageDiagonal 2.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: dotaRampageDiagonal 2.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         .dota-blood-flash {
@@ -77,32 +66,29 @@ function injectRampageStyles() {
             inset: 0;
             pointer-events: none;
             z-index: 9999;
-            background: radial-gradient(circle, transparent 40%, rgba(220, 38, 38, 0.32) 100%);
-            animation: dotaBloodPulse 1.2s ease-out forwards;
+            background: radial-gradient(circle, transparent 45%, rgba(220, 38, 38, 0.28) 100%);
+            animation: dotaBloodPulse 1.1s ease-out forwards;
         }
 
         @keyframes dotaRampageDiagonal {
             0% {
                 opacity: 0;
-                transform: translate(-130%, 35%) rotate(-14deg) scale(2.3);
+                transform: translate(-120%, 30%) rotate(-14deg) scale(1.45);
             }
             12% {
                 opacity: 1;
-                transform: translate(-50%, -50%) rotate(-14deg) scale(1.05);
+                transform: translate(-50%, -50%) rotate(-14deg) scale(1.04);
             }
-            18% {
+            20% {
                 transform: translate(-50%, -50%) rotate(-14deg) scale(0.98);
-            }
-            24% {
-                transform: translate(-50%, -50%) rotate(-14deg) scale(1.02);
             }
             75% {
                 opacity: 1;
-                transform: translate(-50%, -50%) rotate(-14deg) scale(1.04);
+                transform: translate(-50%, -50%) rotate(-14deg) scale(1.02);
             }
             100% {
                 opacity: 0;
-                transform: translate(35%, -135%) rotate(-14deg) scale(1.25);
+                transform: translate(30%, -125%) rotate(-14deg) scale(1.15);
             }
         }
 
@@ -130,7 +116,7 @@ function triggerDotaRampage() {
     setTimeout(() => {
         banner.remove();
         flash.remove();
-    }, 2450);
+    }, 2350);
 }
 
 function playBossSound() {
