@@ -10,14 +10,14 @@
     <div class="standalone-container" id="age-box">
         <h2 id="age-title">Подтвердите свой возраст</h2>
         <form action="/check-age" method="POST" class="ajax-form">
-            <!-- Тут строго стоит type="text", чтобы браузер разрешал вводить и числа, и буквы -->
             <input type="text" name="user_age" id="age-input" placeholder="Введите ваш возраст" required autocomplete="off">
             <button type="submit" class="premium-btn">Получить доступ</button>
         </form>
 
-        <div onclick="toggleNextTheme()" style="color: var(--text-muted); font-size: 12px; cursor: pointer; padding: 5px 10px; border-radius: 20px; transition: var(--transition-premium); margin-top: 5px; border: 1px solid rgba(255,255,255,0.02); background: rgba(0,0,0,0.1);" onmouseover="this.style.color='var(--neon-cyan)', this.style.borderColor='rgba(0,242,254,0.1)'" onmouseout="this.style.color='var(--text-muted)', this.style.borderColor='rgba(255,255,255,0.02)'">
-            🎨 Сменить интерфейс
-        </div>
+        <button type="button" class="theme-pill-btn" onclick="toggleNextTheme()">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+            Сменить интерфейс
+        </button>
     </div>
     <script src="/static/js/age-effects.js"></script>
 </body>
