@@ -2,10 +2,62 @@ document.addEventListener("DOMContentLoaded", () => {
     initTabSystem();
     initCommentSystem();
     initInteractiveMatrix();
+    init3DTiltCards();
     loadSavedTheme();
     injectRampageStyles();
 });
 
+/* ============================================================================
+ * 3D PARALLAX TILT + СТУДИЙНЫЙ БЛИК НА ФОТО
+ * ============================================================================ */
+function init3DTiltCards() {
+    const targets = document.querySelectorAll("#boss-photo, #secret-photo");
+    targets.forEach(img => {
+        if (img.parentElement.classList.contains("tilt-photo-wrapper")) return;
+
+        const wrapper = document.createElement("div");
+        wrapper.className = "tilt-photo-wrapper";
+        img.parentNode.insertBefore(wrapper, img);
+        wrapper.appendChild(img);
+
+        const glare = document.createElement("div");
+        glare.className = "tilt-glare";
+        wrapper.appendChild(glare);
+
+        wrapper.addEventListener("mousemove", (e) => {
+            const rect = wrapper.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = ((y - centerY) / centerY) * -11;
+            const rotateY = ((x - centerX) / centerX) * 11;
+
+            const glareX = (x / rect.width) * 100;
+            const glareY = (y / rect.height) * 100;
+
+            wrapper.style.transition = "transform 0.08s ease-out";
+            wrapper.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`;
+            glare.style.setProperty("--glare-x", `${glareX}%`);
+            glare.style.setProperty("--glare-y", `${glareY}%`);
+        });
+
+        wrapper.addEventListener("mouseleave", () => {
+            wrapper.style.transition = "transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)";
+            wrapper.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
+        });
+
+        wrapper.addEventListener("mousedown", () => {
+            wrapper.style.transform += " scale3d(0.97, 0.97, 0.97)";
+        });
+    });
+}
+
+/* ============================================================================
+ * DOTA 2 RAMPAGE ДИАГОНАЛЬНЫЙ БАННЕР
+ * ============================================================================ */
 function injectRampageStyles() {
     if (document.getElementById("dota-rampage-styles")) return;
     const style = document.createElement("style");
@@ -140,7 +192,8 @@ function initCommentSystem() {
 function initInteractiveMatrix() {
     const photo = document.getElementById("boss-photo");
     if (photo) {
-        photo.addEventListener("click", () => {
+        const clickTarget = photo.closest(".tilt-photo-wrapper") || photo;
+        clickTarget.addEventListener("click", () => {
             triggerDotaRampage();
             playBossSound();
         });
@@ -161,6 +214,10 @@ window.setTheme = function(themeName) {
     document.body.classList.remove('theme-cyan', 'theme-emerald', 'theme-amethyst');
     document.body.classList.add(themeName);
     localStorage.setItem('arseniy-app-theme', themeName);
+
+    document.querySelectorAll(".theme-option-card").forEach(card => {
+        card.classList.toggle("is-selected", card.dataset.theme === themeName);
+    });
 }
 
 window.toggleNextTheme = function() {
@@ -171,8 +228,6 @@ window.toggleNextTheme = function() {
 }
 
 function loadSavedTheme() {
-    const savedTheme = localStorage.getItem('arseniy-app-theme');
-    if (savedTheme) {
-        window.setTheme(savedTheme);
-    }
+    const savedTheme = localStorage.getItem('arseniy-app-theme') || 'theme-cyan';
+    window.setTheme(savedTheme);
 }
