@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function playBossSound() {
     const audio = new Audio("/static/audio/rampage.mp3");
-    audio.volume = 0.85;
+    audio.volume = 0.30;
     audio.play().catch(err => console.warn("Ошибка воспроизведения:", err));
 }
 
