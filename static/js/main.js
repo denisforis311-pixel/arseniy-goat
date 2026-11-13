@@ -3,11 +3,90 @@ document.addEventListener("DOMContentLoaded", () => {
     initCommentSystem();
     initInteractiveMatrix();
     loadSavedTheme();
+    injectRampageStyles();
 });
+
+function injectRampageStyles() {
+    if (document.getElementById("dota-rampage-styles")) return;
+    const style = document.createElement("style");
+    style.id = "dota-rampage-styles";
+    style.textContent = `
+        .dota-rampage-banner {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: min(88vw, 950px);
+            height: auto;
+            pointer-events: none;
+            z-index: 10000;
+            filter: drop-shadow(0 0 25px rgba(239, 68, 68, 0.95)) drop-shadow(0 0 60px rgba(185, 28, 28, 0.8));
+            animation: dotaRampageDiagonal 2.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .dota-blood-flash {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            background: radial-gradient(circle, transparent 40%, rgba(220, 38, 38, 0.35) 100%);
+            animation: dotaBloodPulse 1.2s ease-out forwards;
+        }
+
+        @keyframes dotaRampageDiagonal {
+            0% {
+                opacity: 0;
+                transform: translate(-130%, 35%) rotate(-14deg) scale(2.4);
+            }
+            12% {
+                opacity: 1;
+                transform: translate(-50%, -50%) rotate(-14deg) scale(1.06);
+            }
+            18% {
+                transform: translate(-50%, -50%) rotate(-14deg) scale(0.98);
+            }
+            24% {
+                transform: translate(-50%, -50%) rotate(-14deg) scale(1.02);
+            }
+            75% {
+                opacity: 1;
+                transform: translate(-50%, -50%) rotate(-14deg) scale(1.05);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(35%, -135%) rotate(-14deg) scale(1.3);
+            }
+        }
+
+        @keyframes dotaBloodPulse {
+            0% { opacity: 0; }
+            15% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+function triggerDotaRampage() {
+    document.querySelectorAll(".dota-rampage-banner, .dota-blood-flash").forEach(el => el.remove());
+
+    const flash = document.createElement("div");
+    flash.className = "dota-blood-flash";
+    document.body.appendChild(flash);
+
+    const banner = document.createElement("img");
+    banner.src = "/static/img/rampage.png";
+    banner.className = "dota-rampage-banner";
+    document.body.appendChild(banner);
+
+    setTimeout(() => {
+        banner.remove();
+        flash.remove();
+    }, 2450);
+}
 
 function playBossSound() {
     const audio = new Audio("/static/audio/rampage.mp3");
-    audio.volume = 0.30;
+    audio.volume = 0.85;
     audio.play().catch(err => console.warn("Ошибка воспроизведения:", err));
 }
 
@@ -62,7 +141,7 @@ function initInteractiveMatrix() {
     const photo = document.getElementById("boss-photo");
     if (photo) {
         photo.addEventListener("click", () => {
-            dropRampageRain();
+            triggerDotaRampage();
             playBossSound();
         });
     }
@@ -75,24 +154,6 @@ function initInteractiveMatrix() {
             const data = await res.json();
             ticker.innerText = data.fact;
         });
-    }
-}
-
-function dropRampageRain() {
-    for (let i = 0; i < 16; i++) {
-        const el = document.createElement("img");
-        el.src = "/static/img/rampage.png";
-        el.className = "falling-goat";
-        el.style.left = Math.random() * (window.innerWidth - 140) + "px";
-        el.style.top = "-80px";
-        el.style.width = Math.random() * (180 - 110) + 110 + "px";
-        el.style.height = "auto";
-        el.style.filter = "drop-shadow(0 0 12px rgba(239, 68, 68, 0.8))";
-
-        const dur = Math.random() * 1.3 + 1.2;
-        el.style.animation = `fall ${dur}s linear forwards`;
-        document.body.appendChild(el);
-        setTimeout(() => el.remove(), dur * 1000);
     }
 }
 
