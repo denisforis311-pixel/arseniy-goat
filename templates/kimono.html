@@ -6,23 +6,22 @@
     <title>Секретный Протокол: Кимоно</title>
     <link rel="stylesheet" href="/static/css/global.css">
     <style>
-        /* Локальная красная палитра секретного протокола */
         body.kimono-protocol {
             --accent: #ef4444;
             --accent-bright: #f87171;
             --accent-deep: #991b1b;
             --accent-rgb: 239, 68, 68;
-            --aurora-top: radial-gradient(ellipse 90% 45% at 50% -12%, rgba(239, 68, 68, 0.24), transparent 70%);
+            --aurora-top: radial-gradient(ellipse 90% 45% at 50% -12%, rgba(239, 68, 68, 0.25), transparent 70%);
             --aurora-side: radial-gradient(circle at 85% 30%, rgba(185, 28, 28, 0.1), transparent 45%);
             --aurora-bottom: radial-gradient(ellipse 70% 40% at 20% 105%, rgba(239, 68, 68, 0.1), transparent 60%);
         }
 
         .kimono-card {
-            max-width: 760px;
+            max-width: 780px;
             width: 100%;
-            margin-top: 10px;
-            padding: 36px 40px;
-            border-color: rgba(239, 68, 68, 0.25);
+            padding: 28px 34px;
+            gap: 18px;
+            border-color: rgba(239, 68, 68, 0.28);
         }
 
         .kimono-header {
@@ -31,14 +30,14 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 12px;
-            padding-bottom: 18px;
+            gap: 10px;
+            padding-bottom: 14px;
             border-bottom: 1px solid var(--border-hairline);
         }
 
         .kimono-header h2 {
             margin: 0;
-            font-size: 1.35rem;
+            font-size: 1.3rem;
             color: var(--text-primary);
         }
 
@@ -46,90 +45,95 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 6px 14px;
+            padding: 5px 13px;
             border-radius: 999px;
             background: rgba(239, 68, 68, 0.12);
             border: 1px solid rgba(239, 68, 68, 0.35);
             color: #fca5a5;
-            font-size: 11px;
+            font-size: 10.5px;
             font-weight: 800;
-            letter-spacing: 1.4px;
+            letter-spacing: 1.3px;
             text-transform: uppercase;
         }
 
         .kimono-grid {
             width: 100%;
             display: flex;
-            gap: 32px;
+            gap: 28px;
             align-items: center;
         }
 
-        /* Плотная рамка строго под вертикальное фото без пустых полей */
+        .kimono-photo-col {
+            flex: 0 0 235px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
         .kimono-photo-box {
-            flex: 0 0 260px;
+            width: 100%;
             position: relative;
-            border-radius: 20px;
-            transform-style: preserve-3d;
+            border-radius: 18px;
             will-change: transform;
             cursor: pointer;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 30px -8px rgba(239, 68, 68, 0.35);
+            overflow: hidden;
+            border: 1px solid rgba(239, 68, 68, 0.45);
+            box-shadow: 0 20px 45px -12px rgba(0, 0, 0, 0.9), 0 0 28px -6px rgba(239, 68, 68, 0.35);
         }
 
         .kimono-photo-box img {
             display: block;
             width: 100%;
-            height: auto;
-            border-radius: 20px;
-            border: 1px solid rgba(239, 68, 68, 0.4);
+            max-height: 310px;
+            object-fit: cover;
             pointer-events: none;
+        }
+
+        .kimono-hint {
+            font-size: 11.5px;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 8px;
         }
 
         .kimono-dossier {
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 11px;
             width: 100%;
-        }
-
-        .kimono-hint {
-            font-size: 12px;
-            color: var(--text-muted);
-            text-align: center;
-            margin-top: 10px;
-            letter-spacing: 0.3px;
         }
 
         .btn-return-base {
             background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
             color: #ffffff;
-            box-shadow: 0 10px 30px -5px rgba(239, 68, 68, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.25) inset;
-            margin-top: 6px;
+            box-shadow: 0 10px 28px -5px rgba(239, 68, 68, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.25) inset;
         }
 
         @keyframes screenShake {
             0%, 100% { transform: translate(0, 0); }
-            20% { transform: translate(-6px, 4px); }
-            40% { transform: translate(6px, -4px); }
-            60% { transform: translate(-4px, -3px); }
-            80% { transform: translate(4px, 3px); }
+            20% { transform: translate(-5px, 3px); }
+            40% { transform: translate(5px, -3px); }
+            60% { transform: translate(-4px, -2px); }
+            80% { transform: translate(4px, 2px); }
         }
 
         .shake-active {
-            animation: screenShake 0.35s ease-in-out;
+            animation: screenShake 0.32s ease-in-out;
         }
 
         @media (max-width: 760px) {
             .kimono-card {
-                padding: 28px 22px;
+                padding: 24px 18px;
             }
             .kimono-grid {
                 flex-direction: column;
+                gap: 18px;
             }
-            .kimono-photo-box {
+            .kimono-photo-col {
                 flex: none;
                 width: 100%;
-                max-width: 280px;
+                max-width: 260px;
             }
         }
     </style>
@@ -149,12 +153,12 @@
         </div>
 
         <div class="kimono-grid">
-            <div>
+            <div class="kimono-photo-col">
                 <div class="kimono-photo-box" id="kimono-tilt-box" onclick="triggerKimonoRofl()">
                     <img src="/static/img/photo2.jpg" id="secret-photo" alt="Объект в кимоно">
                     <div class="tilt-glare" id="kimono-glare"></div>
                 </div>
-                <div class="kimono-hint">Нажми на фото для активации протокола</div>
+                <div class="kimono-hint">Нажми на фото для активации</div>
             </div>
 
             <div class="kimono-dossier">
@@ -180,7 +184,6 @@
     </div>
 
     <script>
-        // 3D-наклон и блик для фото в кимоно
         const box = document.getElementById("kimono-tilt-box");
         const glare = document.getElementById("kimono-glare");
 
@@ -192,19 +195,19 @@
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
 
-                const rotateX = ((y - centerY) / centerY) * -11;
-                const rotateY = ((x - centerX) / centerX) * 11;
+                const rotateX = ((y - centerY) / centerY) * -10;
+                const rotateY = ((x - centerX) / centerX) * 10;
 
                 box.style.transition = "transform 0.08s ease-out";
-                box.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`;
+                box.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
                 glare.style.setProperty("--glare-x", `${(x / rect.width) * 100}%`);
                 glare.style.setProperty("--glare-y", `${(y / rect.height) * 100}%`);
                 glare.style.opacity = "1";
             });
 
             box.addEventListener("mouseleave", () => {
-                box.style.transition = "transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)";
-                box.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
+                box.style.transition = "transform 0.5s cubic-bezier(0.22, 1, 0.36, 1)";
+                box.style.transform = "perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)";
                 glare.style.opacity = "0";
             });
         }
@@ -243,4 +246,3 @@
     </script>
 </body>
 </html>
-
