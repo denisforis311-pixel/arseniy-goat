@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
+    injectRampageStyles();
+    init3DTiltCards();
     initTabSystem();
     initCommentSystem();
     initInteractiveMatrix();
-    init3DTiltCards();
     loadSavedTheme();
-    injectRampageStyles();
 });
 
 /* ============================================================================
@@ -56,7 +56,7 @@ function init3DTiltCards() {
 }
 
 /* ============================================================================
- * DOTA 2 RAMPAGE ДИАГОНАЛЬНЫЙ БАННЕР
+ * DOTA 2 RAMPAGE ДИАГОНАЛЬНЫЙ БАННЕР + ЗВУК
  * ============================================================================ */
 function injectRampageStyles() {
     if (document.getElementById("dota-rampage-styles")) return;
@@ -190,10 +190,13 @@ function initCommentSystem() {
 }
 
 function initInteractiveMatrix() {
+    // Делегируем клик на всю зону с фоткой босса, чтобы он срабатывал всегда
+    const photoZone = document.querySelector(".profile-photo-zone");
     const photo = document.getElementById("boss-photo");
-    if (photo) {
-        const clickTarget = photo.closest(".tilt-photo-wrapper") || photo;
-        clickTarget.addEventListener("click", () => {
+
+    if (photoZone && photo) {
+        photoZone.addEventListener("click", (e) => {
+            if (e.target.closest(".phone-link")) return;
             triggerDotaRampage();
             playBossSound();
         });
