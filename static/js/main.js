@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function playBossSound() {
     const audio = new Audio("/static/audio/rampage.mp3");
-    audio.volume = 0.45;
+    audio.volume = 0.85;
     audio.play().catch(err => console.warn("Ошибка воспроизведения:", err));
 }
 
@@ -62,7 +62,7 @@ function initInteractiveMatrix() {
     const photo = document.getElementById("boss-photo");
     if (photo) {
         photo.addEventListener("click", () => {
-            dropGoatRain();
+            dropRampageRain();
             playBossSound();
         });
     }
@@ -78,15 +78,17 @@ function initInteractiveMatrix() {
     }
 }
 
-function dropGoatRain() {
-    const emojis = ["🐐", "👑", "💵"];
-    for (let i = 0; i < 20; i++) {
-        const el = document.createElement("div");
+function dropRampageRain() {
+    for (let i = 0; i < 16; i++) {
+        const el = document.createElement("img");
+        el.src = "/static/img/rampage.png";
         el.className = "falling-goat";
-        el.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-        el.style.left = Math.random() * window.innerWidth + "px";
-        el.style.top = "-50px";
-        el.style.fontSize = Math.random() * (36 - 20) + 20 + "px";
+        el.style.left = Math.random() * (window.innerWidth - 140) + "px";
+        el.style.top = "-80px";
+        el.style.width = Math.random() * (180 - 110) + 110 + "px";
+        el.style.height = "auto";
+        el.style.filter = "drop-shadow(0 0 12px rgba(239, 68, 68, 0.8))";
+
         const dur = Math.random() * 1.3 + 1.2;
         el.style.animation = `fall ${dur}s linear forwards`;
         document.body.appendChild(el);
