@@ -5,26 +5,220 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Секретный Протокол: Кимоно</title>
     <link rel="stylesheet" href="/static/css/global.css">
+    <style>
+        /* Локальная красная палитра секретного протокола */
+        body.kimono-protocol {
+            --accent: #ef4444;
+            --accent-bright: #f87171;
+            --accent-deep: #991b1b;
+            --accent-rgb: 239, 68, 68;
+            --aurora-top: radial-gradient(ellipse 90% 45% at 50% -12%, rgba(239, 68, 68, 0.24), transparent 70%);
+            --aurora-side: radial-gradient(circle at 85% 30%, rgba(185, 28, 28, 0.1), transparent 45%);
+            --aurora-bottom: radial-gradient(ellipse 70% 40% at 20% 105%, rgba(239, 68, 68, 0.1), transparent 60%);
+        }
+
+        .kimono-card {
+            max-width: 760px;
+            width: 100%;
+            margin-top: 10px;
+            padding: 36px 40px;
+            border-color: rgba(239, 68, 68, 0.25);
+        }
+
+        .kimono-header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid var(--border-hairline);
+        }
+
+        .kimono-header h2 {
+            margin: 0;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+        }
+
+        .classified-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.35);
+            color: #fca5a5;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+        }
+
+        .kimono-grid {
+            width: 100%;
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        /* Плотная рамка строго под вертикальное фото без пустых полей */
+        .kimono-photo-box {
+            flex: 0 0 260px;
+            position: relative;
+            border-radius: 20px;
+            transform-style: preserve-3d;
+            will-change: transform;
+            cursor: pointer;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 30px -8px rgba(239, 68, 68, 0.35);
+        }
+
+        .kimono-photo-box img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            pointer-events: none;
+        }
+
+        .kimono-dossier {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            width: 100%;
+        }
+
+        .kimono-hint {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 10px;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-return-base {
+            background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+            color: #ffffff;
+            box-shadow: 0 10px 30px -5px rgba(239, 68, 68, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.25) inset;
+            margin-top: 6px;
+        }
+
+        @keyframes screenShake {
+            0%, 100% { transform: translate(0, 0); }
+            20% { transform: translate(-6px, 4px); }
+            40% { transform: translate(6px, -4px); }
+            60% { transform: translate(-4px, -3px); }
+            80% { transform: translate(4px, 3px); }
+        }
+
+        .shake-active {
+            animation: screenShake 0.35s ease-in-out;
+        }
+
+        @media (max-width: 760px) {
+            .kimono-card {
+                padding: 28px 22px;
+            }
+            .kimono-grid {
+                flex-direction: column;
+            }
+            .kimono-photo-box {
+                flex: none;
+                width: 100%;
+                max-width: 280px;
+            }
+        }
+    </style>
 </head>
-<body>
+<body class="kimono-protocol">
+    <div class="system-telemetry-bar">
+        <span class="status-pulse-dot" style="background: #ef4444; box-shadow: 0 0 10px #ef4444;"></span>
+        <span>SECRET ARCHIVE &bull; CLEARANCE: OMEGA &bull; DOJO PROTOCOL</span>
+    </div>
+
     <h1>ПРОТОКОЛ КИМОНО</h1>
     
-    <div class="standalone-container" style="max-width: 600px; border-color: #ef4444;">
-        <h2 style="color: #ef4444; text-align: center; width: 100%;">Объект в Кимоно Обнаружен!</h2>
-        
-        <div class="profile-photo-zone" style="flex: 1; width: 100%;">
-            <img src="/static/img/photo2.jpg" id="secret-photo" style="max-height: 450px; width: 100%; object-fit: contain;" onclick="triggerKimonoRofl()">
+    <div class="standalone-container kimono-card" id="kimono-card">
+        <div class="kimono-header">
+            <h2>Объект в Кимоно Обнаружен</h2>
+            <span class="classified-tag">File #002 &bull; Top Secret</span>
         </div>
 
-        <button class="premium-btn" style="background: linear-gradient(45deg, #ef4444, #991b1b); color: #fff;" onclick="window.location.href='/'">Вернуться на базу</button>
+        <div class="kimono-grid">
+            <div>
+                <div class="kimono-photo-box" id="kimono-tilt-box" onclick="triggerKimonoRofl()">
+                    <img src="/static/img/photo2.jpg" id="secret-photo" alt="Объект в кимоно">
+                    <div class="tilt-glare" id="kimono-glare"></div>
+                </div>
+                <div class="kimono-hint">Нажми на фото для активации протокола</div>
+            </div>
+
+            <div class="kimono-dossier">
+                <div class="stat-card">
+                    <div class="stat-label">Боевой статус</div>
+                    <div class="stat-value">Грандмастер Киокушинкай</div>
+                    <div class="stat-progress-track"><div class="stat-progress-fill" style="width: 100%;"></div></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Обнаруженные артефакты</div>
+                    <div class="stat-value">Грамота VAZARI + Золото</div>
+                    <div class="stat-progress-track"><div class="stat-progress-fill" style="width: 96%;"></div></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Уровень угрозы</div>
+                    <div class="stat-value" style="color: #f87171;">Критический (Чёрный пояс)</div>
+                    <div class="stat-progress-track"><div class="stat-progress-fill" style="width: 89%;"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <button class="premium-btn btn-return-base" onclick="window.location.href='/'">Вернуться на базу</button>
     </div>
 
     <script>
-        const savedTheme = localStorage.getItem('arseniy-app-theme') || 'theme-cyan';
-        document.body.classList.add(savedTheme);
+        // 3D-наклон и блик для фото в кимоно
+        const box = document.getElementById("kimono-tilt-box");
+        const glare = document.getElementById("kimono-glare");
+
+        if (box && glare) {
+            box.addEventListener("mousemove", (e) => {
+                const rect = box.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = ((y - centerY) / centerY) * -11;
+                const rotateY = ((x - centerX) / centerX) * 11;
+
+                box.style.transition = "transform 0.08s ease-out";
+                box.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`;
+                glare.style.setProperty("--glare-x", `${(x / rect.width) * 100}%`);
+                glare.style.setProperty("--glare-y", `${(y / rect.height) * 100}%`);
+                glare.style.opacity = "1";
+            });
+
+            box.addEventListener("mouseleave", () => {
+                box.style.transition = "transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)";
+                box.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
+                glare.style.opacity = "0";
+            });
+        }
 
         function triggerKimonoRofl() {
             dropPoopRain();
+
+            const card = document.getElementById("kimono-card");
+            if (card) {
+                card.classList.remove("shake-active");
+                void card.offsetWidth;
+                card.classList.add("shake-active");
+            }
+
             const audio = new Audio("/static/audio/sound.mp3");
             audio.volume = 0.85;
             audio.play().catch(err => console.warn("Ошибка воспроизведения:", err));
@@ -49,3 +243,4 @@
     </script>
 </body>
 </html>
+
