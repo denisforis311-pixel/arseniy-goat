@@ -724,48 +724,184 @@ opacity: 0;
 	12. RESPONSIVE ADAPTATION
 • ============================================================================ */
 @media (max-width: 900px) {
-body {
-padding: 36px 16px 60px;
+    body {
+        justify-content: flex-start;
+        padding: 16px 14px 96px;
+    }
+
+    .system-telemetry-bar {
+        font-size: 9px;
+        letter-spacing: 1px;
+        padding: 5px 12px;
+        margin-bottom: 10px;
+    }
+
+    h1 {
+        font-size: 1.45rem;
+        letter-spacing: 4px;
+        margin-bottom: 18px;
+        padding-bottom: 10px;
+    }
+
+    h2 {
+        font-size: 1.15rem;
+        margin-bottom: 14px;
+    }
+
+    .dashboard-layout {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    /* Нижняя панель навигации как в мобильном приложении */
+    .sidebar-menu {
+        position: fixed;
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+        top: auto;
+        width: auto;
+        flex: none;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: stretch;
+        gap: 4px;
+        padding: 6px;
+        border-radius: 20px;
+        background: rgba(12, 13, 18, 0.92);
+        border: 1px solid var(--border-elevated);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(0, 0, 0, 0.6);
+        z-index: 900;
+    }
+
+    .menu-btn {
+        flex: 1;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        gap: 4px;
+        padding: 8px 4px;
+        border-radius: 14px;
+        font-size: 9.5px;
+        line-height: 1.15;
+        letter-spacing: 0;
+    }
+
+    .menu-btn:hover {
+        transform: none;
+    }
+
+    .menu-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .menu-btn.active::before {
+        left: 25%;
+        right: 25%;
+        top: 0;
+        bottom: auto;
+        width: auto;
+        height: 2.5px;
+        border-radius: 0 0 4px 4px;
+    }
+
+    .menu-btn.logout-btn {
+        margin-top: 0;
+    }
+
+    .menu-btn.logout-btn:hover {
+        transform: none;
+    }
+
+    /* Компактная рабочая область без лишней прокрутки */
+    .main-content {
+        width: 100%;
+        padding: 20px 16px;
+        min-height: auto;
+        border-radius: 22px;
+    }
+
+    .tab-content {
+        gap: 14px;
+    }
+
+    .profile-grid {
+        flex-direction: column-reverse;
+        gap: 14px;
+    }
+
+    .profile-photo-zone {
+        flex: none;
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
+        gap: 14px;
+        background: var(--bg-recessed);
+        border: 1px solid var(--border-hairline);
+        padding: 12px;
+        border-radius: 18px;
+    }
+
+    .tilt-photo-wrapper {
+        width: 105px;
+        flex-shrink: 0;
+        border-radius: 14px;
+    }
+
+    .profile-photo-zone img {
+        height: 125px;
+        max-height: 125px;
+        border-radius: 14px;
+    }
+
+    .phone-link {
+        padding: 12px 10px;
+        font-size: 12.5px;
+    }
+
+    .profile-info {
+        gap: 10px;
+    }
+
+    .stat-card {
+        padding: 13px 16px;
+        border-radius: 14px;
+    }
+
+    .stat-label {
+        font-size: 10px;
+        margin-bottom: 4px;
+    }
+
+    .stat-value {
+        font-size: 16.5px;
+    }
+
+    .stat-progress-track {
+        margin-top: 8px;
+    }
+
+    .comments-archive {
+        max-height: 220px;
+    }
+
+    .meme-ticker {
+        padding: 26px 18px;
+        min-height: 110px;
+    }
+
+    #meme-ticker-text {
+        font-size: 15.5px;
+    }
+
+    .standalone-container {
+        padding: 32px 22px;
+        margin-top: 4vh;
+    }
 }
-h1 {
-font-size: 1.85rem;
-letter-spacing: 5px;
-margin-bottom: 30px;
-}
-.dashboard-layout {
-flex-direction: column;
-gap: 20px;
-}
-.sidebar-menu {
-flex: none;
-width: 100%;
-position: static;
-padding: 16px;
-}
-.menu-btn.logout-btn {
-margin-top: 12px;
-}
-.main-content {
-width: 100%;
-padding: 28px 22px;
-min-height: auto;
-}
-.profile-grid {
-flex-direction: column-reverse;
-gap: 24px;
-}
-.profile-photo-zone {
-flex: none;
-width: 100%;
-}
-.profile-photo-zone img {
-max-height: 380px;
-}
-.standalone-container {
-padding: 36px 26px;
-margin-top: 4vh;
-}
-}
+
 /* ============================================================================
 • 
 	13. LUXURY THEME PILLS & SETTINGS CARDS (CLEAN CLASSES)
