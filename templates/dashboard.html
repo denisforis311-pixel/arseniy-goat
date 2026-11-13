@@ -7,28 +7,68 @@
     <link rel="stylesheet" href="/static/css/global.css">
 </head>
 <body>
+    <div class="system-telemetry-bar">
+        <span class="status-pulse-dot"></span>
+        <span>SYSTEM ONLINE &bull; NODE: MINSK-01 &bull; CLEARANCE: VIP</span>
+    </div>
+
     <h1>ARSENIY CORE v2.0</h1>
+
     <div class="dashboard-layout">
         <aside class="sidebar-menu">
-            <button class="menu-btn active" data-tab="tab-profile">👤 Профиль Босса</button>
-            <button class="menu-btn" data-tab="tab-database">📂 База Отзывов</button>
-            <button class="menu-btn" data-tab="tab-matrix">📊 Матрица Рофлов</button>
-            <button class="menu-btn" data-tab="tab-settings">⚙️ Настройки стиля</button>
-            <button class="menu-btn logout-btn" onclick="window.location.href='/logout'">🚪 Сбежать</button>
+            <button class="menu-btn active" data-tab="tab-profile">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Профиль Босса
+            </button>
+            <button class="menu-btn" data-tab="tab-database">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                База Отзывов
+            </button>
+            <button class="menu-btn" data-tab="tab-matrix">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                Матрица Рофлов
+            </button>
+            <button class="menu-btn" data-tab="tab-settings">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                Настройки стиля
+            </button>
+            <button class="menu-btn logout-btn" onclick="window.location.href='/logout'">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                Сбежать
+            </button>
         </aside>
+
         <main class="main-content">
             <!-- ВКЛАДКА 1: ХАРАКТЕРИСТИКИ АРСЕНИЯ -->
             <section class="tab-content active" id="tab-profile">
-                <h2>ТТХ Объекта</h2>
+                <div class="section-header-row">
+                    <h2>ТТХ Объекта</h2>
+                    <span class="verified-badge">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        Verified GOAT
+                    </span>
+                </div>
                 <div class="profile-grid">
                     <div class="profile-info">
-                        <div class="stat-card"><div class="stat-label">Идентификатор</div><div class="stat-value">ZXC Владыка доты</div></div>
-                        <div class="stat-card"><div class="stat-label">Габариты (Рост/Калибр)</div><div class="stat-value">300 / <span class="secret-stat">50 см</span></div></div>
-                        <div class="stat-card"><div class="stat-label">Масса брутто</div><div class="stat-value">не известен</div></div>
+                        <div class="stat-card">
+                            <div class="stat-label">Идентификатор</div>
+                            <div class="stat-value">ZXC Владыка доты</div>
+                            <div class="stat-progress-track"><div class="stat-progress-fill" style="width: 100%;"></div></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Габариты (Рост / Калибр)</div>
+                            <div class="stat-value">300 / <span class="secret-stat">50 см</span></div>
+                            <div class="stat-progress-track"><div class="stat-progress-fill" style="width: 94%;"></div></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Масса брутто</div>
+                            <div class="stat-value">не известен</div>
+                            <div class="stat-progress-track"><div class="stat-progress-fill" style="width: 78%;"></div></div>
+                        </div>
                     </div>
                     <div class="profile-photo-zone">
                         <img src="/static/img/photo.jpg" id="boss-photo">
-                        <a href="tel:+375336479461" class="phone-link">📞 +375 (33) 647-94-61</a>
+                        <a href="tel:+375336479461" class="phone-link">+375 (33) 647-94-61</a>
                     </div>
                 </div>
             </section>
@@ -47,7 +87,7 @@
             <!-- ВКЛАДКА 3: ЦЕНТР УПРАВЛЕНИЯ РОФЛАМИ -->
             <section class="tab-content" id="tab-matrix">
                 <h2>Центр Управления</h2>
-                <div class="stats-banner">Просмотров: <strong>{{TOTAL_VIEWS}}</strong> | Пропущено инвесторов: <strong>{{PASSED_CHECKS}}</strong></div>
+                <div class="stats-banner">Просмотров: <strong>{{TOTAL_VIEWS}}</strong> &nbsp;|&nbsp; Пропущено инвесторов: <strong>{{PASSED_CHECKS}}</strong></div>
                 <div class="meme-ticker"><p id="meme-ticker-text">« {{RANDOM_MEME}} »</p></div>
                 <button class="premium-btn" id="roll-meme-btn">Сгенерировать Истину</button>
             </section>
