@@ -5,6 +5,12 @@ document.addEventListener("DOMContentLoaded", () => {
     loadSavedTheme();
 });
 
+function playBossSound() {
+    const audio = new Audio("/static/audio/rampage.mp3");
+    audio.volume = 0.85;
+    audio.play().catch(err => console.warn("Ошибка воспроизведения:", err));
+}
+
 function initTabSystem() {
     const menuButtons = document.querySelectorAll(".menu-btn[data-tab]");
     const tabContents = document.querySelectorAll(".tab-content");
@@ -54,7 +60,12 @@ function initCommentSystem() {
 
 function initInteractiveMatrix() {
     const photo = document.getElementById("boss-photo");
-    if (photo) photo.addEventListener("click", dropGoatRain);
+    if (photo) {
+        photo.addEventListener("click", () => {
+            dropGoatRain();
+            playBossSound();
+        });
+    }
 
     const rollBtn = document.getElementById("roll-meme-btn");
     const ticker = document.getElementById("meme-ticker-text");
