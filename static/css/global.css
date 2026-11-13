@@ -902,3 +902,109 @@ margin-top: 4vh;
 .tilt-photo-wrapper:hover .tilt-glare {
     opacity: 1;
 }
+/* ============================================================================
+ * 15. TELEMETRY STATUS BAR, VERIFIED BADGE & TACTICAL BARS
+ * ============================================================================ */
+
+.system-telemetry-bar {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 18px;
+    margin-bottom: 18px;
+    border-radius: 999px;
+    background: rgba(14, 15, 20, 0.75);
+    border: 1px solid var(--border-hairline);
+    backdrop-filter: blur(20px);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.8);
+}
+
+.status-pulse-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 10px #10b981;
+    animation: pulseLive 2s infinite;
+}
+
+@keyframes pulseLive {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.section-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 4px;
+}
+
+.section-header-row h2 {
+    margin-bottom: 0;
+}
+
+.verified-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: rgba(var(--accent-rgb), 0.12);
+    border: 1px solid rgba(var(--accent-rgb), 0.35);
+    color: var(--accent-bright);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+
+.verified-badge svg {
+    width: 14px;
+    height: 14px;
+    stroke: var(--accent-bright);
+}
+
+/* Векторные иконки в меню */
+.menu-btn svg {
+    width: 17px;
+    height: 17px;
+    stroke: currentColor;
+    opacity: 0.75;
+    flex-shrink: 0;
+    transition: opacity 0.25s ease, transform 0.25s var(--ease-spring);
+}
+
+.menu-btn:hover svg,
+.menu-btn.active svg {
+    opacity: 1;
+    stroke: var(--accent-bright);
+}
+
+.menu-btn.logout-btn:hover svg {
+    stroke: #fecaca;
+}
+
+/* Шкалы характеристик внутри карточек */
+.stat-progress-track {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 4px;
+    margin-top: 12px;
+    overflow: hidden;
+}
+
+.stat-progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--accent-deep), var(--accent-bright));
+    box-shadow: 0 0 12px rgba(var(--accent-rgb), 0.6);
+}
