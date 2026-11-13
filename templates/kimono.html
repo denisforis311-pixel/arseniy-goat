@@ -13,8 +13,7 @@
         <h2 style="color: #ef4444; text-align: center; width: 100%;">Объект в Кимоно Обнаружен!</h2>
         
         <div class="profile-photo-zone" style="flex: 1; width: 100%;">
-            <!-- 🔥 Заменили роут /get-photo2 на прямой статический путь -->
-            <img src="/static/img/photo2.jpg" id="secret-photo" style="max-height: 450px; width: 100%; object-fit: contain;" onclick="dropPoopRain()">
+            <img src="/static/img/photo2.jpg" id="secret-photo" style="max-height: 450px; width: 100%; object-fit: contain;" onclick="triggerKimonoRofl()">
         </div>
 
         <button class="premium-btn" style="background: linear-gradient(45deg, #ef4444, #991b1b); color: #fff;" onclick="window.location.href='/'">Вернуться на базу</button>
@@ -23,6 +22,13 @@
     <script>
         const savedTheme = localStorage.getItem('arseniy-app-theme') || 'theme-cyan';
         document.body.classList.add(savedTheme);
+
+        function triggerKimonoRofl() {
+            dropPoopRain();
+            const audio = new Audio("/static/audio/sound.mp3");
+            audio.volume = 0.85;
+            audio.play().catch(err => console.warn("Ошибка воспроизведения:", err));
+        }
 
         function dropPoopRain() {
             for (let i = 0; i < 25; i++) {
